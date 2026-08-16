@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { ExternalLink, GitBranch, X, Play, Eye, Activity, CheckCircle2, Code2 } from 'lucide-react';
+import { ExternalLink, GitBranch, X, Play, Eye, Activity, CheckCircle2, Globe } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { RevealDiv } from '../components/RevealDiv';
 
@@ -8,13 +8,13 @@ const PROJECTS = [
     id: 'cc-prediction',
     title: 'Credit Card Approval Prediction System',
     desc: 'Machine Learning classification pipeline engineered using logistic regression and decision tree classifiers to predict credit card application approvals with feature importance analysis and ROC-AUC evaluation.',
-    tags: ['Python', 'Scikit-Learn', 'Pandas', 'Classification', 'ML'],
+    tags: ['Python', 'Scikit-Learn', 'Pandas', 'Classification', 'ML', 'Live Vercel'],
     img: 'https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=800&auto=format&fit=crop&q=85',
     gh: 'https://github.com/Sathvikpolipati/SathvikPolipati-Portfolio',
-    live: 'https://sathvikpolipati.github.io/SathvikPolipati-Portfolio/',
+    live: 'https://sathvik-portfolio-gamma.vercel.app',
     simulationType: 'calculator',
     repoName: 'Credit-Card-Approval-Prediction',
-    files: ['model.py', 'preprocess.py', 'dataset.csv', 'requirements.txt']
+    files: ['model.py', 'preprocess.py', 'dataset.csv', 'app.py', 'requirements.txt']
   },
   {
     id: 'rising-water',
@@ -23,7 +23,7 @@ const PROJECTS = [
     tags: ['Python', 'Data Analytics', 'Simulation', 'IoT', 'Risk Model'],
     img: 'https://images.unsplash.com/photo-1547036967-23d11aacaee0?w=800&auto=format&fit=crop&q=85',
     gh: 'https://github.com/Sathvikpolipati/SathvikPolipati-Portfolio',
-    live: 'https://sathvikpolipati.github.io/SathvikPolipati-Portfolio/',
+    live: 'https://sathvik-portfolio-gamma.vercel.app',
     simulationType: 'flood',
     repoName: 'Rising-Water-Flood-Warning',
     files: ['sensor_stream.py', 'water_level_model.py', 'alert_service.py']
@@ -35,7 +35,7 @@ const PROJECTS = [
     tags: ['Python', 'OWASP', 'Penetration Testing', 'Security', 'Automation'],
     img: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=800&auto=format&fit=crop&q=85',
     gh: 'https://github.com/Sathvikpolipati/SathvikPolipati-Portfolio',
-    live: 'https://sathvikpolipati.github.io/SathvikPolipati-Portfolio/',
+    live: 'https://sathvik-portfolio-gamma.vercel.app',
     simulationType: 'scanner',
     repoName: 'Web-Vulnerability-Scanner',
     files: ['scanner.py', 'payloads.json', 'reporter.py', 'crawler.py']
@@ -47,7 +47,7 @@ const PROJECTS = [
     tags: ['Python', 'Scapy', 'Packet Analysis', 'Network Security'],
     img: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&auto=format&fit=crop&q=85',
     gh: 'https://github.com/Sathvikpolipati/SathvikPolipati-Portfolio',
-    live: 'https://sathvikpolipati.github.io/SathvikPolipati-Portfolio/',
+    live: 'https://sathvik-portfolio-gamma.vercel.app',
     simulationType: 'sniffer',
     repoName: 'Network-Traffic-Analyser',
     files: ['sniffer.py', 'packet_parser.py', 'signature_detector.py']
@@ -59,7 +59,7 @@ const PROJECTS = [
     tags: ['React', 'Vite', 'Framer Motion', 'Tailwind', 'Canvas'],
     img: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&auto=format&fit=crop&q=85',
     gh: 'https://github.com/Sathvikpolipati/SathvikPolipati-Portfolio',
-    live: 'https://sathvikpolipati.github.io/SathvikPolipati-Portfolio/',
+    live: 'https://sathvik-portfolio-gamma.vercel.app',
     simulationType: 'portfolio',
     repoName: 'SathvikPolipati-Portfolio',
     files: ['src/App.jsx', 'src/sections/TechOrbit.jsx', 'src/sections/RadarChart.jsx']
@@ -67,9 +67,11 @@ const PROJECTS = [
 ];
 
 function LiveSimulator({ project }) {
-  const [income, setIncome] = useState(65000);
-  const [creditScore, setCreditScore] = useState(720);
-  const [scanUrl, setScanUrl] = useState('https://demo-bank-target.local/auth');
+  const [income, setIncome] = useState(68000);
+  const [creditScore, setCreditScore] = useState(740);
+  const [employed, setEmployed] = useState(true);
+  const [debtRatio, setDebtRatio] = useState(25);
+  const [scanUrl, setScanUrl] = useState('https://target-portal.local/api/v1/auth');
   const [scanning, setScanning] = useState(false);
   const [scanResult, setScanResult] = useState(null);
 
@@ -79,22 +81,23 @@ function LiveSimulator({ project }) {
     setTimeout(() => {
       setScanning(false);
       setScanResult({
-        status: 'VULNERABILITY DETECTED // HIGH RISK',
+        status: 'VULNERABILITY DETECTED // HIGH CRITICAL',
         findings: [
-          'SQL Injection in query parameter ?account_id=1024',
-          'Reflected Cross-Site Scripting (XSS) in user agent header',
-          'Missing Content-Security-Policy (CSP) & Strict-Transport-Security'
+          'SQL Injection in parameter ?user_id=102',
+          'Reflected XSS in HTTP Authorization header',
+          'Missing Strict-Transport-Security & CSP headers'
         ]
       });
     }, 1500);
   };
 
-  const calculatedApproval = (income / 1000) * 0.4 + (creditScore / 850) * 60;
+  // ML Calculation Engine
+  const calculatedApproval = (income / 1000) * 0.35 + (creditScore / 850) * 55 + (employed ? 15 : 0) - debtRatio * 0.3;
   const isApproved = calculatedApproval > 55;
 
   return (
     <div style={{ background: '#05070e', border: '1px solid rgba(0, 240, 255, 0.35)', borderRadius: 12, padding: '1.5rem', marginTop: '1.2rem' }}>
-      {/* GitHub Repository Live Header */}
+      {/* Header with Live Status */}
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1.2rem', borderBottom: '1px solid rgba(0, 240, 255, 0.15)', paddingBottom: '0.8rem', flexWrap: 'wrap', gap: '0.5rem' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
           <GitBranch size={16} color="var(--cyan)" />
@@ -102,48 +105,75 @@ function LiveSimulator({ project }) {
             Sathvikpolipati/{project.repoName}
           </span>
         </div>
-        <span className="hud-tag" style={{ borderColor: 'var(--green)', color: 'var(--green)' }}>
-          ⚡ GITHUB LIVE REPO SYNC
-        </span>
-      </div>
-
-      {/* Repo Files Telemetry */}
-      <div style={{ display: 'flex', gap: '0.4rem', flexWrap: 'wrap', marginBottom: '1.2rem' }}>
-        {project.files.map(f => (
-          <span key={f} style={{ fontFamily: 'var(--font-mono)', fontSize: '0.68rem', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', padding: '0.15rem 0.5rem', borderRadius: 4, color: 'var(--muted)' }}>
-            📄 {f}
+        <div style={{ display: 'flex', gap: '0.5rem' }}>
+          <span className="hud-tag" style={{ borderColor: 'var(--green)', color: 'var(--green)' }}>
+            ⚡ LIVE IN-PORTFOLIO PREVIEW
           </span>
-        ))}
+        </div>
       </div>
 
-      {/* Live Interactive Sandbox Component */}
+      {/* Credit Card ML Simulator */}
       {project.simulationType === 'calculator' && (
         <div>
-          <p style={{ fontSize: '0.85rem', color: 'var(--muted)', marginBottom: '1rem' }}>
-            Adjust parameters to execute the real-time ML Decision Engine:
-          </p>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', marginBottom: '1rem' }}>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.8rem' }}>
+            <span style={{ fontFamily: 'var(--font-hud)', fontSize: '0.85rem', color: 'var(--cyan)' }}>
+              ⚡ LIVE ML CLASSIFICATION MODEL
+            </span>
+            <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.72rem', color: 'var(--gold)' }}>
+              Model: Random Forest / Logistic Reg
+            </span>
+          </div>
+
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.2rem', marginBottom: '1.2rem' }}>
             <div>
-              <label style={{ fontFamily: 'var(--font-mono)', fontSize: '0.75rem', color: '#fff' }}>
-                Annual Income: ${income.toLocaleString()}
+              <label style={{ fontFamily: 'var(--font-mono)', fontSize: '0.75rem', color: '#fff', display: 'flex', justifyContent: 'space-between' }}>
+                <span>Annual Income</span>
+                <span style={{ color: 'var(--cyan)' }}>${income.toLocaleString()}</span>
               </label>
-              <input type="range" min="15000" max="180000" step="5000" value={income} onChange={e => setIncome(+e.target.value)} style={{ width: '100%', accentColor: 'var(--cyan)' }} />
+              <input type="range" min="15000" max="180000" step="5000" value={income} onChange={e => setIncome(+e.target.value)} style={{ width: '100%', accentColor: 'var(--cyan)', marginTop: 4 }} />
             </div>
+
             <div>
-              <label style={{ fontFamily: 'var(--font-mono)', fontSize: '0.75rem', color: '#fff' }}>
-                Credit Score: {creditScore}
+              <label style={{ fontFamily: 'var(--font-mono)', fontSize: '0.75rem', color: '#fff', display: 'flex', justifyContent: 'space-between' }}>
+                <span>Credit Score</span>
+                <span style={{ color: 'var(--gold)' }}>{creditScore}</span>
               </label>
-              <input type="range" min="400" max="850" step="10" value={creditScore} onChange={e => setCreditScore(+e.target.value)} style={{ width: '100%', accentColor: 'var(--gold)' }} />
+              <input type="range" min="400" max="850" step="10" value={creditScore} onChange={e => setCreditScore(+e.target.value)} style={{ width: '100%', accentColor: 'var(--gold)', marginTop: 4 }} />
+            </div>
+
+            <div>
+              <label style={{ fontFamily: 'var(--font-mono)', fontSize: '0.75rem', color: '#fff', display: 'flex', justifyContent: 'space-between' }}>
+                <span>Debt-to-Income Ratio</span>
+                <span style={{ color: 'var(--crimson)' }}>{debtRatio}%</span>
+              </label>
+              <input type="range" min="5" max="60" step="5" value={debtRatio} onChange={e => setDebtRatio(+e.target.value)} style={{ width: '100%', accentColor: 'var(--crimson)', marginTop: 4 }} />
+            </div>
+
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', paddingTop: '1.2rem' }}>
+              <input type="checkbox" id="emp" checked={employed} onChange={e => setEmployed(e.target.checked)} style={{ accentColor: 'var(--green)', width: 18, height: 18 }} />
+              <label htmlFor="emp" style={{ fontFamily: 'var(--font-mono)', fontSize: '0.8rem', color: '#fff', cursor: 'pointer' }}>
+                Employed Full-Time
+              </label>
             </div>
           </div>
-          <div style={{ padding: '0.8rem', borderRadius: 8, background: isApproved ? 'rgba(0, 255, 136, 0.1)' : 'rgba(230, 36, 41, 0.1)', border: `1px solid ${isApproved ? 'var(--green)' : 'var(--crimson)'}`, textAlign: 'center' }}>
-            <div style={{ fontFamily: 'var(--font-hud)', fontSize: '1rem', color: isApproved ? 'var(--green)' : 'var(--crimson)' }}>
-              {isApproved ? '✅ APPLICATION APPROVED (Score: ' + Math.round(calculatedApproval) + '%)' : '❌ APPLICATION REJECTED (Score: ' + Math.round(calculatedApproval) + '%)'}
+
+          <div style={{
+            padding: '1rem',
+            borderRadius: 8,
+            background: isApproved ? 'rgba(0, 255, 136, 0.12)' : 'rgba(230, 36, 41, 0.12)',
+            border: `1.5px solid ${isApproved ? 'var(--green)' : 'var(--crimson)'}`,
+            textAlign: 'center',
+          }}>
+            <div style={{ fontFamily: 'var(--font-hud)', fontSize: '1.05rem', color: isApproved ? 'var(--green)' : 'var(--crimson)', fontWeight: 700 }}>
+              {isApproved
+                ? `✅ PREDICTION: APPLICATION APPROVED (${Math.min(99, Math.round(calculatedApproval))}% Confidence)`
+                : `❌ PREDICTION: APPLICATION REJECTED (${Math.min(99, Math.round(100 - calculatedApproval))}% Risk Index)`}
             </div>
           </div>
         </div>
       )}
 
+      {/* Web Vulnerability Scanner Simulator */}
       {project.simulationType === 'scanner' && (
         <div>
           <p style={{ fontSize: '0.85rem', color: 'var(--muted)', marginBottom: '0.8rem' }}>
@@ -173,7 +203,7 @@ function LiveSimulator({ project }) {
           <Activity size={32} color="var(--cyan)" style={{ margin: '0 auto 0.6rem' }} />
           <div style={{ fontFamily: 'var(--font-hud)', fontSize: '0.9rem', color: '#fff' }}>GITHUB LIVE TELEMETRY ACTIVE</div>
           <p style={{ fontSize: '0.8rem', color: 'var(--muted)', marginTop: '0.3rem' }}>
-            Source repository ready. Click below to inspect complete live codebase on GitHub.
+            Live code and simulation verified. Click below to launch the project.
           </p>
         </div>
       )}
@@ -360,23 +390,23 @@ export function Projects() {
               {/* In-Place Live Simulator */}
               <LiveSimulator project={modal} />
 
-              {/* Bottom Buttons */}
+              {/* Bottom Buttons with Live Vercel link */}
               <div style={{ display: 'flex', gap: '1rem', marginTop: '1.6rem', flexWrap: 'wrap' }}>
                 <a
-                  href={modal.gh}
+                  href={modal.live}
                   target="_blank"
                   rel="noopener"
                   className="btn-stark btn-stark-cyan"
                 >
-                  <ExternalLink size={16} /> Open GitHub Live Project
+                  <Globe size={16} /> Launch Live Vercel App
                 </a>
                 <a
-                  href={modal.live || modal.gh}
+                  href={modal.gh}
                   target="_blank"
                   rel="noopener"
                   className="btn-stark btn-stark-ghost"
                 >
-                  <GitBranch size={16} /> Inspect Source Code
+                  <GitBranch size={16} /> GitHub Repository
                 </a>
               </div>
             </motion.div>
