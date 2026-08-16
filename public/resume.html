@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Sathvik Polipati - Resume</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#f8f9ff;font-family:'DM Sans',sans-serif;color:#1a1a2e;font-size:14px;line-height:1.6}
+.page{max-width:820px;margin:0 auto;background:#fff;min-height:100vh}
+.print-btn{position:fixed;top:20px;right:20px;background:#7c6af7;color:#fff;border:none;padding:0.7rem 1.4rem;border-radius:8px;cursor:pointer;font-family:'DM Mono',monospace;font-size:0.8rem;letter-spacing:0.06em;z-index:100;display:flex;align-items:center;gap:0.5rem;box-shadow:0 4px 20px rgba(124,106,247,0.4);transition:opacity 0.2s}
+.print-btn:hover{opacity:0.85}
+@media print{.print-btn{display:none}body{background:#fff}.page{margin:0;max-width:100%}}
+
+/* HEADER */
+.header{background:linear-gradient(135deg,#0a0a0f 0%,#1a1a35 100%);color:#fff;padding:2.2rem 3rem;display:grid;grid-template-columns:auto 1fr;gap:2rem;align-items:center}
+.header-photo{width:86px;height:86px;border-radius:14px;overflow:hidden;border:2px solid rgba(124,106,247,0.5);flex-shrink:0}
+.header-photo img{width:100%;height:100%;object-fit:cover;object-position:top center}
+.header-name{font-family:'Syne',sans-serif;font-weight:800;font-size:1.9rem;letter-spacing:-0.02em;color:#f0eff8}
+.header-title{color:#c084fc;font-family:'DM Mono',monospace;font-size:0.82rem;letter-spacing:0.1em;margin-top:0.2rem;text-transform:uppercase}
+.header-contacts{display:flex;gap:1.2rem;flex-wrap:wrap;margin-top:0.7rem}
+.hc{display:flex;align-items:center;gap:0.35rem;font-family:'DM Mono',monospace;font-size:0.7rem;color:#8886a4;text-decoration:none}
+.hc span{color:#c084fc}
+
+/* BODY */
+.body{display:grid;grid-template-columns:1fr 265px;gap:0}
+.main{padding:1.8rem 2.2rem;border-right:1px solid #eee}
+.sidebar{padding:1.8rem 1.6rem;background:#f8f9ff}
+
+/* SECTION */
+.sec{margin-bottom:1.6rem}
+.sec-title{font-family:'Syne',sans-serif;font-weight:700;font-size:0.82rem;letter-spacing:0.14em;text-transform:uppercase;color:#7c6af7;border-bottom:2px solid #7c6af7;padding-bottom:0.3rem;margin-bottom:0.9rem}
+
+/* ITEMS */
+.item{margin-bottom:1.1rem}
+.item-header{display:flex;justify-content:space-between;align-items:flex-start;gap:0.75rem;margin-bottom:0.2rem}
+.item-title{font-family:'Syne',sans-serif;font-weight:700;font-size:0.97rem;color:#1a1a2e}
+.item-date{font-family:'DM Mono',monospace;font-size:0.68rem;color:#7c6af7;white-space:nowrap;background:#ede8fe;border-radius:100px;padding:0.12rem 0.55rem;flex-shrink:0}
+.item-sub{color:#7c6af7;font-family:'DM Mono',monospace;font-size:0.75rem;margin-bottom:0.35rem}
+.item-id{font-family:'DM Mono',monospace;font-size:0.65rem;color:#8886a4;margin-bottom:0.3rem}
+.item-desc{color:#4a4a6a;font-size:0.85rem;line-height:1.55}
+.item-tags{display:flex;flex-wrap:wrap;gap:0.3rem;margin-top:0.45rem}
+.itag{background:#ede8fe;color:#7c6af7;border-radius:100px;padding:0.1rem 0.5rem;font-family:'DM Mono',monospace;font-size:0.63rem}
+.itag-green{background:#dcfce7;color:#16a34a}
+.itag-gold{background:#fef9c3;color:#b45309}
+
+/* SUMMARY */
+.summary{background:#f0edfe;border-left:3px solid #7c6af7;padding:0.85rem 1rem;border-radius:0 8px 8px 0;color:#3a3a5e;font-size:0.88rem;line-height:1.6;margin-bottom:1.4rem}
+
+/* SIDEBAR */
+.skill-row{margin-bottom:0.7rem}
+.skill-name{font-size:0.8rem;color:#1a1a2e;margin-bottom:0.22rem;display:flex;justify-content:space-between}
+.skill-name span{color:#8886a4;font-family:'DM Mono',monospace;font-size:0.65rem}
+.skill-bar-wrap{background:#e8e8f8;border-radius:100px;height:4px;overflow:hidden}
+.skill-bar{height:100%;background:linear-gradient(90deg,#7c6af7,#c084fc);border-radius:100px}
+.platform-item{display:flex;align-items:flex-start;gap:0.5rem;margin-bottom:0.55rem}
+.pdot{width:7px;height:7px;border-radius:50%;background:#7c6af7;margin-top:0.35rem;flex-shrink:0}
+.platform-link{color:#7c6af7;text-decoration:none;font-family:'DM Mono',monospace;font-size:0.7rem;display:block}
+</style>
+</head>
+<body>
+
+<button class="print-btn" onclick="window.print()">&#8595; Save as PDF &nbsp;(Ctrl+P)</button>
+
+<div class="page">
+  <!-- HEADER -->
+  <div class="header">
+    <div class="header-photo"><img src="profile.jpg" alt="Sathvik Polipati"/></div>
+    <div>
+      <div class="header-name">Sathvik Polipati</div>
+      <div class="header-title">Cyber Security Engineer &bull; Full-Stack Developer &bull; AI/ML Enthusiast</div>
+      <div class="header-contacts">
+        <a class="hc" href="mailto:polipatisathvik@gmail.com"><span>&#9993;</span>polipatisathvik@gmail.com</a>
+        <a class="hc" href="https://github.com/Sathvikpolipati" target="_blank"><span>&#128025;</span>Sathvikpolipati</a>
+        <a class="hc" href="https://linkedin.com/in/sathvik-polipati" target="_blank"><span>&#128188;</span>sathvik-polipati</a>
+        <a class="hc" href="https://tryhackme.com/p/ultimatealienx401" target="_blank"><span>&#128128;</span>@ultimatealienx401</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="body">
+    <!-- MAIN COLUMN -->
+    <div class="main">
+
+      <div class="summary">
+        Computer Science Engineering student at NBKRIST specialising in <strong>Cyber Security</strong> and <strong>Full-Stack Development</strong>. Completed internships in Cyber Security (HM Cyber Academy) and Artificial Intelligence &amp; ML (SmartBridge/APSCHE). Certified by NPTEL on Privacy &amp; Security. Active practitioner on TryHackMe and PortSwigger Web Security Academy.
+      </div>
+
+      <!-- INTERNSHIP EXPERIENCE -->
+      <div class="sec">
+        <div class="sec-title">Internships &amp; Experience</div>
+
+        <div class="item">
+          <div class="item-header">
+            <div class="item-title">Cyber Security Intern</div>
+            <div class="item-date">Jun&ndash;Jul 2025</div>
+          </div>
+          <div class="item-sub">HM Cyber Academy &mdash; &ldquo;Hack the Future&rdquo; &bull; 6 Weeks</div>
+          <div class="item-id">Certificate ID: HMCA/2025/7/009 &bull; Issued: 21 July 2025 &bull; Instructor: Mukesh Pyda</div>
+          <div class="item-desc">Intensive 6-week internship covering penetration testing, ethical hacking, vulnerability assessment, and hands-on use of security tools including Kali Linux, Burp Suite, and Nmap.</div>
+          <div class="item-tags">
+            <span class="itag itag-green">&#128272; Cyber Security</span>
+            <span class="itag">Penetration Testing</span>
+            <span class="itag">Ethical Hacking</span>
+            <span class="itag">Burp Suite</span>
+            <span class="itag">Kali Linux</span>
+          </div>
+        </div>
+
+        <div class="item">
+          <div class="item-header">
+            <div class="item-title">AI &amp; Machine Learning Virtual Intern</div>
+            <div class="item-date">Aug 2026</div>
+          </div>
+          <div class="item-sub">SmartBridge Educational Services &bull; AP State Council of Higher Education &bull; JNTU Anantapur</div>
+          <div class="item-id">Certificate ID: VIP-AIML-2026-5057 &bull; Hall Ticket: 23KB1A05G8 &bull; 2 months / 120 hours</div>
+          <div class="item-desc">Short-Term Virtual Internship on Artificial Intelligence and Machine Learning. Covered supervised/unsupervised learning, neural networks, model evaluation, feature engineering, and real-world AI project development.</div>
+          <div class="item-tags">
+            <span class="itag itag-green">&#129302; AI &amp; ML</span>
+            <span class="itag">Python</span>
+            <span class="itag">Scikit-learn</span>
+            <span class="itag">Neural Networks</span>
+            <span class="itag">120 Hours</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- EDUCATION -->
+      <div class="sec">
+        <div class="sec-title">Education</div>
+        <div class="item">
+          <div class="item-header">
+            <div class="item-title">B.Tech &mdash; Computer Science &amp; Engineering</div>
+            <div class="item-date">2022&ndash;Present</div>
+          </div>
+          <div class="item-sub">NBKRIST &mdash; Nandamuri Basavatarakam Krishna Ranganadha Institute of Science &amp; Technology, Vidyanagar, AP</div>
+          <div class="item-desc">Specialising in Cyber Security and Full-Stack Development. Participating in CTF competitions, hackathons, and security research projects.</div>
+          <div class="item-tags"><span class="itag">B.Tech CSE</span><span class="itag">Cyber Security</span><span class="itag">Full-Stack</span></div>
+        </div>
+        <div class="item">
+          <div class="item-header">
+            <div class="item-title">Intermediate (MPC) &mdash; Class XII</div>
+            <div class="item-date">2020&ndash;2022</div>
+          </div>
+          <div class="item-sub">Sri Chaitanya Junior College, Andhra Pradesh</div>
+          <div class="item-tags"><span class="itag">MPC</span></div>
+        </div>
+      </div>
+
+      <!-- CERTIFICATIONS -->
+      <div class="sec">
+        <div class="sec-title">Certifications</div>
+        <div class="item">
+          <div class="item-header"><div class="item-title">Privacy and Security in Online Social Media</div><div class="item-date">Jan&ndash;Apr 2025</div></div>
+          <div class="item-sub">NPTEL &bull; IIT Hyderabad / IIT Madras &bull; Skill India (MoE, Govt. of India)</div>
+          <div class="item-id">Roll: NPTEL25CS79S153600246 &bull; Score: 53% &bull; 12-week course &bull; 3&ndash;4 Credits</div>
+          <div class="item-desc">Online Assignments: 22.39/25 &bull; Proctored Exam: 30.62/75. Among 10,457 certified candidates.</div>
+          <div class="item-tags"><span class="itag itag-gold">NPTEL</span><span class="itag">Privacy</span><span class="itag">Security</span><span class="itag">Skill India</span></div>
+        </div>
+        <div class="item">
+          <div class="item-header"><div class="item-title">TryHackMe Learning Paths</div><div class="item-date">Ongoing</div></div>
+          <div class="item-sub">TryHackMe &bull; @ultimatealienx401</div>
+          <div class="item-desc">Pre-Security, Jr Penetration Tester, and Web Fundamentals paths. Real lab rooms with live exploits.</div>
+          <div class="item-tags"><span class="itag">Pentesting</span><span class="itag">Web Security</span></div>
+        </div>
+        <div class="item">
+          <div class="item-header"><div class="item-title">Python 5&#9733; Gold Badge</div><div class="item-date">Certified</div></div>
+          <div class="item-sub">HackerRank &bull; @sathvikpolipati</div>
+          <div class="item-tags"><span class="itag">Python</span><span class="itag">Algorithms</span></div>
+        </div>
+        <div class="item">
+          <div class="item-header"><div class="item-title">Web Security Academy Labs</div><div class="item-date">Ongoing</div></div>
+          <div class="item-sub">PortSwigger &bull; Burp Suite</div>
+          <div class="item-desc">XSS, SQLi, CSRF, SSRF, XXE labs with professional tooling.</div>
+          <div class="item-tags"><span class="itag">OWASP</span><span class="itag">Burp Suite</span></div>
+        </div>
+      </div>
+
+      <!-- PROJECTS -->
+      <div class="sec">
+        <div class="sec-title">Projects</div>
+        <div class="item">
+          <div class="item-header"><div class="item-title">Credit Card Approval Prediction</div><div class="item-date">ML</div></div>
+          <div class="item-desc">ML model predicting credit card approval using logistic regression and decision trees with feature engineering pipelines.</div>
+          <div class="item-tags"><span class="itag">Python</span><span class="itag">Scikit-learn</span><span class="itag">Pandas</span><span class="itag">ML</span></div>
+        </div>
+        <div class="item">
+          <div class="item-header"><div class="item-title">Rising Water</div><div class="item-date">Simulation</div></div>
+          <div class="item-desc">Flood simulation and early-warning system monitoring water levels using real-time data and predictive modelling.</div>
+          <div class="item-tags"><span class="itag">Python</span><span class="itag">Data Analysis</span><span class="itag">IoT</span></div>
+        </div>
+        <div class="item">
+          <div class="item-header"><div class="item-title">Web Vulnerability Scanner</div><div class="item-date">Security</div></div>
+          <div class="item-desc">Automated Python tool detecting SQLi, XSS, and open redirects with configurable scan profiles.</div>
+          <div class="item-tags"><span class="itag">Python</span><span class="itag">OWASP</span><span class="itag">Automation</span></div>
+        </div>
+        <div class="item">
+          <div class="item-header"><div class="item-title">Network Traffic Analyser</div><div class="item-date">Security</div></div>
+          <div class="item-desc">Real-time packet capture with Scapy identifying suspicious traffic and port scans.</div>
+          <div class="item-tags"><span class="itag">Python</span><span class="itag">Scapy</span><span class="itag">Networking</span></div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- SIDEBAR -->
+    <div class="sidebar">
+
+      <div class="sec">
+        <div class="sec-title">Technical Skills</div>
+        <div class="skill-row"><div class="skill-name">Python<span>Advanced</span></div><div class="skill-bar-wrap"><div class="skill-bar" style="width:90%"></div></div></div>
+        <div class="skill-row"><div class="skill-name">Penetration Testing<span>Advanced</span></div><div class="skill-bar-wrap"><div class="skill-bar" style="width:85%"></div></div></div>
+        <div class="skill-row"><div class="skill-name">Web App Security<span>Advanced</span></div><div class="skill-bar-wrap"><div class="skill-bar" style="width:82%"></div></div></div>
+        <div class="skill-row"><div class="skill-name">AI / Machine Learning<span>Intermediate</span></div><div class="skill-bar-wrap"><div class="skill-bar" style="width:78%"></div></div></div>
+        <div class="skill-row"><div class="skill-name">JavaScript / React<span>Intermediate</span></div><div class="skill-bar-wrap"><div class="skill-bar" style="width:75%"></div></div></div>
+        <div class="skill-row"><div class="skill-name">Network Security<span>Intermediate</span></div><div class="skill-bar-wrap"><div class="skill-bar" style="width:75%"></div></div></div>
+        <div class="skill-row"><div class="skill-name">C / C++<span>Intermediate</span></div><div class="skill-bar-wrap"><div class="skill-bar" style="width:70%"></div></div></div>
+        <div class="skill-row"><div class="skill-name">SQL / MongoDB<span>Intermediate</span></div><div class="skill-bar-wrap"><div class="skill-bar" style="width:72%"></div></div></div>
+      </div>
+
+      <div class="sec">
+        <div class="sec-title">Security Tools</div>
+        <div style="display:flex;flex-wrap:wrap;gap:0.3rem">
+          <span class="itag">Burp Suite</span><span class="itag">Nmap</span><span class="itag">Metasploit</span>
+          <span class="itag">Wireshark</span><span class="itag">Kali Linux</span><span class="itag">Scapy</span>
+          <span class="itag">Netcat</span><span class="itag">SQLmap</span><span class="itag">Gobuster</span>
+        </div>
+      </div>
+
+      <div class="sec">
+        <div class="sec-title">Dev Tools</div>
+        <div style="display:flex;flex-wrap:wrap;gap:0.3rem">
+          <span class="itag">Git / GitHub</span><span class="itag">VS Code</span><span class="itag">Node.js</span>
+          <span class="itag">Flask</span><span class="itag">React.js</span><span class="itag">MongoDB</span>
+          <span class="itag">MySQL</span><span class="itag">Linux</span>
+        </div>
+      </div>
+
+      <div class="sec">
+        <div class="sec-title">Profiles</div>
+        <div class="platform-item"><div class="pdot"></div><div><div style="font-size:0.8rem;font-weight:600">TryHackMe</div><a class="platform-link" href="https://tryhackme.com/p/ultimatealienx401">@ultimatealienx401</a></div></div>
+        <div class="platform-item"><div class="pdot"></div><div><div style="font-size:0.8rem;font-weight:600">HackerRank</div><a class="platform-link" href="https://www.hackerrank.com/sathvikpolipati">@sathvikpolipati</a></div></div>
+        <div class="platform-item"><div class="pdot"></div><div><div style="font-size:0.8rem;font-weight:600">PortSwigger</div><a class="platform-link" href="https://portswigger.net/web-security">Web Security Academy</a></div></div>
+        <div class="platform-item"><div class="pdot"></div><div><div style="font-size:0.8rem;font-weight:600">GitHub</div><a class="platform-link" href="https://github.com/Sathvikpolipati">Sathvikpolipati</a></div></div>
+        <div class="platform-item"><div class="pdot"></div><div><div style="font-size:0.8rem;font-weight:600">LinkedIn</div><a class="platform-link" href="https://linkedin.com/in/sathvik-polipati">sathvik-polipati</a></div></div>
+      </div>
+
+      <div class="sec">
+        <div class="sec-title">Key Stats</div>
+        <div class="platform-item"><div class="pdot"></div><span style="font-size:0.8rem">3 Completed Internships</span></div>
+        <div class="platform-item"><div class="pdot"></div><span style="font-size:0.8rem">120 hrs AI/ML Training</span></div>
+        <div class="platform-item"><div class="pdot"></div><span style="font-size:0.8rem">5&#9733; Python (HackerRank)</span></div>
+        <div class="platform-item"><div class="pdot"></div><span style="font-size:0.8rem">NPTEL Certified (Privacy & Security)</span></div>
+        <div class="platform-item"><div class="pdot"></div><span style="font-size:0.8rem">Active CTF Player (TryHackMe)</span></div>
+      </div>
+
+      <div class="sec">
+        <div class="sec-title">Languages</div>
+        <div class="platform-item"><div class="pdot"></div><span style="font-size:0.8rem">Telugu &mdash; Native</span></div>
+        <div class="platform-item"><div class="pdot"></div><span style="font-size:0.8rem">English &mdash; Professional</span></div>
+        <div class="platform-item"><div class="pdot"></div><span style="font-size:0.8rem">Hindi &mdash; Conversational</span></div>
+      </div>
+
+    </div>
+  </div>
+</div>
+</body>
+</html>
