@@ -6,7 +6,7 @@
   <p><strong>Handle:</strong> <code>@soulreaper</code> &bull; <strong>TryHackMe:</strong> <code>@ultimatealienx401</code> &bull; <strong>College:</strong> NBKRIST CSE</p>
   
   <p>
-    <a href="https://sathvikpolipati.github.io/Sathvik-Portfolio/">🌐 <strong>Live Portfolio Website</strong></a> &bull;
+    <a href="https://sathvikpolipati.github.io/-Sathvik-Portfolio/">🌐 <strong>Live GitHub Portfolio</strong></a> &bull;
     <a href="https://sathvik-portfolio-gamma.vercel.app">⚡ <strong>Live Vercel Mirror</strong></a> &bull;
     <a href="https://linkedin.com/in/sathvik-polipati">💼 <strong>LinkedIn</strong></a> &bull;
     <a href="https://tryhackme.com/p/ultimatealienx401">💀 <strong>TryHackMe</strong></a>
@@ -17,7 +17,7 @@
 
 ## 📖 About // My Learning Journey
 
-**Live Portfolio Link:** [https://sathvikpolipati.github.io/Sathvik-Portfolio/](https://sathvikpolipati.github.io/Sathvik-Portfolio/)
+**Live Portfolio Link:** [https://sathvikpolipati.github.io/-Sathvik-Portfolio/](https://sathvikpolipati.github.io/-Sathvik-Portfolio/)
 
 I am **Sathvik Polipati**, a Computer Science & Engineering student at **NBKRIST** (Andhra Pradesh), operating under the hacker handle **`@soulreaper`**. I combine two high-impact domains: **Offensive Cyber Security** and **Full-Stack Intelligent Systems**.
 
@@ -55,10 +55,10 @@ I am **Sathvik Polipati**, a Computer Science & Engineering student at **NBKRIST
 
 ```bash
 # Clone the repository
-git clone https://github.com/Sathvikpolipati/Sathvik-Portfolio.git
+git clone https://github.com/Sathvikpolipati/-Sathvik-Portfolio.git
 
 # Navigate to project directory
-cd Sathvik-Portfolio
+cd -Sathvik-Portfolio
 
 # Install dependencies
 npm install
