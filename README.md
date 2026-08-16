@@ -1,7 +1,6 @@
 # 🌌 Sathvik Polipati — Soul Reaper Portfolio (Iron Man HUD Edition)
 
 <div align="center">
-  <img src="public/profile.jpg" alt="Sathvik Polipati" width="140" style="border-radius: 50%; border: 3px solid #00f0ff; box-shadow: 0 0 25px rgba(0,240,255,0.7);" />
   <h3>⚡ Offensive Cyber Security Engineer &bull; Full-Stack Architect &bull; AI/ML Practitioner ⚡</h3>
   <p><strong>Handle:</strong> <code>@soulreaper</code> &bull; <strong>TryHackMe:</strong> <code>@ultimatealienx401</code> &bull; <strong>College:</strong> NBKRIST CSE</p>
   
