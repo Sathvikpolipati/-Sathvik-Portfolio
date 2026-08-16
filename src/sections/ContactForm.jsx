@@ -1,11 +1,11 @@
 import { useState } from 'react';
-import { Send, CheckCircle, AlertCircle, Mail, ExternalLink } from 'lucide-react';
+import { Send, CheckCircle, ExternalLink } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { RevealDiv } from '../components/RevealDiv';
 import confetti from 'canvas-confetti';
 
 const CHANNELS = [
-  { icon: '✉️', label: 'DIRECT EMAIL', val: 'polipatisathvik@gmail.com', url: 'mailto:polipatisathvik@gmail.com' },
+  { icon: '✉️', label: 'DIRECT EMAIL', val: 'polipatisathvik@gmail.com', url: 'mailto:polipatisathvik@gmail.com?subject=WANT%20to%20Connect!&body=Hi%20Sathvik%2C%0A%0AThank%20you%20for%20reaching%20out%20%E2%80%94%20it%27s%20great%20to%20connect%20with%20you!%0A%0AI%27d%20love%20to%20learn%20more%20about%20what%20you%27re%20working%20on%20and%20see%20where%20our%20paths%20might%20align.%20Feel%20free%20to%20share%20a%20bit%20about%20yourself%2C%20or%20let%20me%20know%20a%20good%20time%20for%20a%20quick%20call%2Fchat.%0A%0ALooking%20forward%20to%20staying%20in%20touch.%0A%0ABest%20regards%2C' },
   { icon: '💼', label: 'LINKEDIN NETWORK', val: 'linkedin.com/in/sathvik-polipati', url: 'https://linkedin.com/in/sathvik-polipati' },
   { icon: '💀', label: 'TRYHACKME HANDLE', val: '@ultimatealienx401 (Soul Reaper)', url: 'https://tryhackme.com/p/ultimatealienx401' },
   { icon: '🐙', label: 'GITHUB ARMORY', val: 'github.com/Sathvikpolipati', url: 'https://github.com/Sathvikpolipati' },
@@ -20,17 +20,45 @@ export function Contact() {
     if (!email) return;
     setStatus('loading');
 
-    setTimeout(() => {
-      // Save contact email to local storage
-      const contacts = JSON.parse(localStorage.getItem('soulreaper_contacts') || '[]');
-      contacts.push({ email, timestamp: new Date().toISOString() });
-      localStorage.setItem('soulreaper_contacts', JSON.stringify(contacts));
+    // Save contact record locally
+    const contacts = JSON.parse(localStorage.getItem('soulreaper_contacts') || '[]');
+    contacts.push({
+      email,
+      timestamp: new Date().toISOString(),
+      subject: 'WANT to Connect!',
+      recipient: 'polipatisathvik@gmail.com'
+    });
+    localStorage.setItem('soulreaper_contacts', JSON.stringify(contacts));
 
-      setStatus('success');
-      confetti({ particleCount: 110, spread: 80, origin: { y: 0.6 }, colors: ['#00f0ff', '#ffb703', '#e62429'] });
-      setEmail('');
-      setTimeout(() => setStatus('idle'), 4000);
-    }, 700);
+    // Construct pre-formatted email dispatch to polipatisathvik@gmail.com
+    const subject = encodeURIComponent('WANT to Connect!');
+    const body = encodeURIComponent(
+`Hi Sathvik,
+
+Thank you for reaching out — it's great to connect with you!
+
+Sender Email: ${email}
+
+I'd love to learn more about what you're working on and see where our paths might align. Feel free to share a bit about yourself, or let me know a good time for a quick call/chat.
+
+Looking forward to staying in touch.
+
+Best regards,`
+    );
+
+    // Trigger email client dispatch to polipatisathvik@gmail.com
+    const mailtoUrl = `mailto:polipatisathvik@gmail.com?subject=${subject}&body=${body}`;
+    window.open(mailtoUrl, '_blank');
+
+    setStatus('success');
+    confetti({
+      particleCount: 110,
+      spread: 80,
+      origin: { y: 0.6 },
+      colors: ['#00f0ff', '#ffb703', '#e62429']
+    });
+    setEmail('');
+    setTimeout(() => setStatus('idle'), 4000);
   };
 
   return (
@@ -45,7 +73,7 @@ export function Contact() {
         </RevealDiv>
 
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '3rem', marginTop: '3.5rem', alignItems: 'start' }}>
-          {/* Direct Transmission Dispatch Box */}
+          {/* Direct Transmission Dispatch Box (Interface Preserved) */}
           <RevealDiv delay={0.3}>
             <div className="hud-glass" style={{ padding: '2rem' }}>
               <h3 style={{ fontFamily: 'var(--font-hud)', fontSize: '1.1rem', color: '#fff', marginBottom: '0.6rem' }}>
@@ -94,7 +122,7 @@ export function Contact() {
                       exit={{ opacity: 0 }}
                       style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginTop: '1rem', color: 'var(--green)', fontFamily: 'var(--font-mono)', fontSize: '0.82rem' }}
                     >
-                      <CheckCircle size={16} /> Transmission logged! I will reach out promptly.
+                      <CheckCircle size={16} /> Transmission dispatched to polipatisathvik@gmail.com!
                     </motion.div>
                   )}
                 </AnimatePresence>

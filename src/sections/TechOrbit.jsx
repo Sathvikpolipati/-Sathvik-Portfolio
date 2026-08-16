@@ -150,7 +150,7 @@ export function TechOrbit() {
                   letterSpacing: '0.08em',
                 }}
               >
-                KALI CORE
+                KALI LINUX
               </span>
             </div>
 
