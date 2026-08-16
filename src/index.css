@@ -210,3 +210,21 @@ body {
 @media (max-width: 768px) {
   .section { padding: 4.5rem 1.25rem; }
 }
+
+/* Tech Orbit Keyframes (Icons always stay perfectly upright) */
+@keyframes orbit-cw {
+  0% { transform: translate(-50%, -50%) rotate(0deg); }
+  100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+@keyframes orbit-ccw {
+  0% { transform: translate(-50%, -50%) rotate(0deg); }
+  100% { transform: translate(-50%, -50%) rotate(-360deg); }
+}
+@keyframes counter-cw {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(-360deg); }
+}
+@keyframes counter-cw2 {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
