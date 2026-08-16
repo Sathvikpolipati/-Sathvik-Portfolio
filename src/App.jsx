@@ -52,14 +52,14 @@ function ResumeModal({ open, onClose }) {
         </button>
         <div style={{ fontSize: '3rem', marginBottom: '0.8rem' }}>🛡️</div>
         <h3 style={{ fontFamily: 'var(--font-hud)', fontSize: '1.4rem', color: '#fff', marginBottom: '0.6rem' }}>
-          STARK DOSSIER // SATHVIK
+          SOUL REAPER RESUME // SATHVIK
         </h3>
         <p style={{ color: 'var(--muted)', fontSize: '0.9rem', lineHeight: 1.6, marginBottom: '2rem' }}>
-          Verified technical records, ethical hacking certifications, academic credentials, and project history.
+          Verified technical records, ethical hacking certifications, academic credentials, and engineering projects.
         </p>
         <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem', flexWrap: 'wrap' }}>
           <a href="/resume.html" target="_blank" className="btn-stark btn-stark-cyan" onClick={onClose}>
-            Access Dossier (PDF)
+            Access Resume (PDF)
           </a>
           <button className="btn-stark btn-stark-ghost" onClick={onClose}>
             Dismiss

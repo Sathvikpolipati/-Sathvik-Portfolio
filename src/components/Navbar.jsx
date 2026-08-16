@@ -7,10 +7,10 @@ const LINKS = [
   ['orbit', 'Tech Orbit'],
   ['radar', 'Radar'],
   ['platforms', 'Platforms'],
-  ['projects', 'Armory'],
+  ['projects', 'Projects'],
   ['certifications', 'Certs'],
   ['github', 'Telemetry'],
-  ['contact', 'Comm Link'],
+  ['contact', 'Connect'],
 ];
 
 export function Navbar({ onCmdOpen, dark, onThemeToggle }) {
@@ -58,7 +58,7 @@ export function Navbar({ onCmdOpen, dark, onThemeToggle }) {
         gap: '0.4rem',
       }}>
         <span style={{ color: 'var(--cyan)', textShadow: '0 0 10px var(--cyan)' }}>⚡</span>
-        STARK<span style={{ color: 'var(--gold)' }}>.</span>SP
+        SOUL REAPER<span style={{ color: 'var(--gold)' }}>.</span>SP
       </a>
 
       {/* Desktop Links */}

@@ -1,13 +1,13 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Shield, Terminal, Download, ExternalLink, Cpu } from 'lucide-react';
+import { Shield, Terminal, Download, ExternalLink } from 'lucide-react';
 
 const ROLES = [
-  'CYBER SECURITY ENGINEER',
-  'OFFENSIVE SECURITY & ETHICAL HACKER',
-  'FULL-STACK ARCHITECT',
+  'SOUL REAPER // OFFENSIVE SECURITY ENGINEER',
+  'ETHICAL HACKER & PENETRATION TESTER',
+  'FULL-STACK SYSTEM ARCHITECT',
   'AI & MACHINE LEARNING PRACTITIONER',
-  'CTF CHALLENGER // TRYHACKME'
+  'CTF CHALLENGER // @ULTIMATEALIENX401'
 ];
 
 function useTyping(words) {
@@ -17,7 +17,7 @@ function useTyping(words) {
 
   useEffect(() => {
     const cur = words[idx];
-    const speed = deleting ? 35 : 75;
+    const speed = deleting ? 30 : 70;
     const timer = setTimeout(() => {
       if (!deleting) {
         setText(cur.slice(0, text.length + 1));
@@ -102,7 +102,7 @@ export function Hero({ onResumeClick }) {
         }}>
           <img
             src="/profile.jpg"
-            alt="Sathvik Polipati"
+            alt="Sathvik Polipati (Soul Reaper)"
             style={{
               width: '100%',
               height: '100%',
@@ -141,7 +141,7 @@ export function Hero({ onResumeClick }) {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, delay: 0.25 }}
       >
-        {/* Protocol Badge */}
+        {/* Protocol Badge with Soul Reaper Handle */}
         <div style={{
           display: 'inline-flex',
           alignItems: 'center',
@@ -158,7 +158,7 @@ export function Hero({ onResumeClick }) {
           boxShadow: '0 0 15px rgba(0, 240, 255, 0.2)',
         }}>
           <span style={{ width: 8, height: 8, borderRadius: '50%', background: 'var(--cyan)', boxShadow: '0 0 8px var(--cyan)', display: 'inline-block' }} />
-          STARK PROTOCOL // SYSTEM ONLINE &bull; NBKRIST CSE
+          SOUL REAPER PROTOCOL // SATHVIK POLIPATI &bull; @soulreaper
         </div>
 
         {/* Name */}
@@ -186,7 +186,7 @@ export function Hero({ onResumeClick }) {
           fontFamily: 'var(--font-hud)',
           fontSize: 'clamp(0.95rem, 2.4vw, 1.4rem)',
           color: 'var(--gold)',
-          letterSpacing: '0.1em',
+          letterSpacing: '0.08em',
           minHeight: '2em',
           marginBottom: '1.4rem',
         }}>
@@ -203,21 +203,20 @@ export function Hero({ onResumeClick }) {
           margin: '0 auto 2.2rem',
           fontFamily: 'var(--font-main)',
         }}>
-          Computer Science Engineer specialising in <strong style={{ color: '#fff' }}>Offensive Cyber Security</strong>,{' '}
-          <strong style={{ color: '#fff' }}>Full-Stack Web Development</strong>, and <strong style={{ color: '#fff' }}>AI/Machine Learning</strong>.{' '}
-          Engineering robust cyber defenses by mastering attack vectors.
+          Operating under handle <strong style={{ color: 'var(--cyan)' }}>@soulreaper</strong>. Computer Science Engineer specialising in <strong style={{ color: '#fff' }}>Offensive Cyber Security</strong>,{' '}
+          <strong style={{ color: '#fff' }}>Full-Stack Web Architecture</strong>, and <strong style={{ color: '#fff' }}>AI/Machine Learning</strong>.
         </p>
 
         {/* CTA Buttons */}
         <div style={{ display: 'flex', gap: '0.9rem', justifyContent: 'center', flexWrap: 'wrap' }}>
           <a href="#projects" className="btn-stark btn-stark-cyan">
-            <Terminal size={16} /> Explore Armory
+            <Terminal size={16} /> Explore Projects
           </a>
           <button className="btn-stark btn-stark-ghost" onClick={onResumeClick}>
-            <Download size={16} /> Access Dossier
+            <Download size={16} /> Access Resume
           </button>
           <a href="https://linkedin.com/in/sathvik-polipati" target="_blank" rel="noopener" className="btn-stark btn-stark-ghost">
-            <ExternalLink size={16} /> Stark Network
+            <ExternalLink size={16} /> Soul Reaper Network
           </a>
         </div>
 

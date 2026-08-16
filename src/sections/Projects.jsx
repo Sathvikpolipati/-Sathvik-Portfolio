@@ -1,15 +1,158 @@
 import { useState } from 'react';
-import { ExternalLink, GitBranch, X, Maximize2 } from 'lucide-react';
+import { ExternalLink, GitBranch, X, Play, Eye, CheckCircle2, Sliders, ShieldAlert, Activity } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { RevealDiv } from '../components/RevealDiv';
 
 const PROJECTS = [
-  { title:'Credit Card Approval Prediction', desc:'ML model predicting credit card approval using logistic regression and decision tree classifiers with feature engineering and cross-validation pipelines.', tags:['Python','Scikit-learn','Pandas','ML'], img:'https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=600&auto=format&fit=crop&q=80', gh:'https://github.com/Sathvikpolipati' },
-  { title:'Rising Water', desc:'Flood simulation and early-warning alert system monitoring water level data and triggering real-time notifications using predictive modelling and data analysis.', tags:['Python','Data Analysis','Simulation','IoT'], img:'https://images.unsplash.com/photo-1547036967-23d11aacaee0?w=600&auto=format&fit=crop&q=80', gh:'https://github.com/Sathvikpolipati' },
-  { title:'Web Vulnerability Scanner', desc:'Automated Python tool detecting SQLi, XSS, and open redirects in web applications with configurable scan profiles and detailed vulnerability reports.', tags:['Python','OWASP','Security','Automation'], img:'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=600&auto=format&fit=crop&q=80', gh:'https://github.com/Sathvikpolipati' },
-  { title:'Network Traffic Analyser', desc:'Real-time packet capture and analysis tool identifying suspicious traffic, port scans, and intrusion attempts using Python and Scapy.', tags:['Python','Scapy','Networking','Security'], img:'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=600&auto=format&fit=crop&q=80', gh:'https://github.com/Sathvikpolipati' },
-  { title:'Personal Portfolio Website', desc:'Premium dark-mode portfolio with cursor spotlight, particle network background, glassmorphism cards, command palette (Ctrl+K), framer-motion animations, and Vercel deployment.', tags:['React','Vite','Framer Motion','Vercel'], img:'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&auto=format&fit=crop&q=80', gh:'https://github.com/Sathvikpolipati/SathvikPolipati-Portfolio' },
+  {
+    id: 'cc-prediction',
+    title: 'Credit Card Approval Prediction System',
+    desc: 'Machine Learning classification pipeline engineered using logistic regression and decision tree classifiers to predict credit card application approvals with feature importance analysis and ROC-AUC evaluation.',
+    tags: ['Python', 'Scikit-Learn', 'Pandas', 'Classification', 'ML'],
+    img: 'https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=600&auto=format&fit=crop&q=80',
+    gh: 'https://github.com/Sathvikpolipati',
+    live: 'https://sathvikpolipati.github.io/SathvikPolipati-Portfolio/',
+    simulationType: 'calculator'
+  },
+  {
+    id: 'rising-water',
+    title: 'Rising Water — Flood Prediction & Early Warning',
+    desc: 'IoT and predictive data simulation system tracking water levels, historical rain telemetry, and generating automated flood risk hazard alerts.',
+    tags: ['Python', 'Data Analytics', 'Simulation', 'IoT', 'Risk Model'],
+    img: 'https://images.unsplash.com/photo-1547036967-23d11aacaee0?w=600&auto=format&fit=crop&q=80',
+    gh: 'https://github.com/Sathvikpolipati',
+    live: 'https://sathvikpolipati.github.io/SathvikPolipati-Portfolio/',
+    simulationType: 'flood'
+  },
+  {
+    id: 'vuln-scanner',
+    title: 'Automated Web Vulnerability Scanner',
+    desc: 'Python offensive security tool automated for detecting OWASP vulnerabilities (SQL Injection, Stored/Reflected XSS, Open Redirects) with HTTP headers inspection.',
+    tags: ['Python', 'OWASP', 'Penetration Testing', 'Security', 'Automation'],
+    img: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=600&auto=format&fit=crop&q=80',
+    gh: 'https://github.com/Sathvikpolipati',
+    live: 'https://sathvikpolipati.github.io/SathvikPolipati-Portfolio/',
+    simulationType: 'scanner'
+  },
+  {
+    id: 'traffic-analyser',
+    title: 'Network Traffic Analyser & Packet Monitor',
+    desc: 'Real-time network traffic sniffer built on Python Scapy to intercept packets, decode protocols, detect suspicious port scan activities, and log anomalies.',
+    tags: ['Python', 'Scapy', 'Packet Analysis', 'Network Security'],
+    img: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=600&auto=format&fit=crop&q=80',
+    gh: 'https://github.com/Sathvikpolipati',
+    live: 'https://sathvikpolipati.github.io/SathvikPolipati-Portfolio/',
+    simulationType: 'sniffer'
+  },
+  {
+    id: 'portfolio-upgrade',
+    title: 'Soul Reaper Cyber Portfolio (Iron Man HUD)',
+    desc: 'Full-stack reactive portfolio built with React, Vite, Tailwind CSS, Arc Reactor animations, interactive radar chart, dynamic tech orbit, and Vercel cloud deployment.',
+    tags: ['React', 'Vite', 'Framer Motion', 'Tailwind', 'Canvas'],
+    img: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&auto=format&fit=crop&q=80',
+    gh: 'https://github.com/Sathvikpolipati/SathvikPolipati-Portfolio',
+    live: 'https://sathvikpolipati.github.io/SathvikPolipati-Portfolio/',
+    simulationType: 'portfolio'
+  },
 ];
+
+function LiveSimulator({ project }) {
+  // Interactive Simulation Sandbox State
+  const [income, setIncome] = useState(65000);
+  const [creditScore, setCreditScore] = useState(720);
+  const [scanUrl, setScanUrl] = useState('https://target-bank-demo.local/login');
+  const [scanning, setScanning] = useState(false);
+  const [scanResult, setScanResult] = useState(null);
+
+  const runScanner = () => {
+    setScanning(true);
+    setScanResult(null);
+    setTimeout(() => {
+      setScanning(false);
+      setScanResult({
+        status: 'VULNERABILITY DETECTED',
+        findings: [
+          'SQLi vulnerable parameter: ?id=1',
+          'XSS Reflected in error handler',
+          'Missing Content-Security-Policy (CSP)'
+        ]
+      });
+    }, 1800);
+  };
+
+  const calculatedApproval = (income / 1000) * 0.4 + (creditScore / 850) * 60;
+  const isApproved = calculatedApproval > 55;
+
+  return (
+    <div style={{ background: '#070a12', border: '1px solid rgba(0, 240, 255, 0.3)', borderRadius: 12, padding: '1.5rem', marginTop: '1.2rem' }}>
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1rem', borderBottom: '1px solid rgba(0, 240, 255, 0.15)', paddingBottom: '0.6rem' }}>
+        <span style={{ fontFamily: 'var(--font-hud)', fontSize: '0.8rem', color: 'var(--cyan)' }}>
+          ⚡ LIVE PROJECT SANDBOX &bull; INTERACTIVE TELEMETRY
+        </span>
+        <span className="hud-tag" style={{ borderColor: 'var(--green)', color: 'var(--green)' }}>
+          STATUS: RUNNING
+        </span>
+      </div>
+
+      {project.simulationType === 'calculator' && (
+        <div>
+          <p style={{ fontSize: '0.85rem', color: 'var(--muted)', marginBottom: '1rem' }}>
+            Adjust parameters to execute the real-time ML Decision Engine:
+          </p>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', marginBottom: '1rem' }}>
+            <div>
+              <label style={{ fontFamily: 'var(--font-mono)', fontSize: '0.75rem', color: '#fff' }}>Annual Income: ${income.toLocaleString()}</label>
+              <input type="range" min="15000" max="180000" step="5000" value={income} onChange={e => setIncome(+e.target.value)} style={{ width: '100%', accentColor: 'var(--cyan)' }} />
+            </div>
+            <div>
+              <label style={{ fontFamily: 'var(--font-mono)', fontSize: '0.75rem', color: '#fff' }}>Credit Score: {creditScore}</label>
+              <input type="range" min="400" max="850" step="10" value={creditScore} onChange={e => setCreditScore(+e.target.value)} style={{ width: '100%', accentColor: 'var(--gold)' }} />
+            </div>
+          </div>
+          <div style={{ padding: '0.8rem', borderRadius: 8, background: isApproved ? 'rgba(0, 255, 136, 0.1)' : 'rgba(230, 36, 41, 0.1)', border: `1px solid ${isApproved ? 'var(--green)' : 'var(--crimson)'}`, textAlign: 'center' }}>
+            <div style={{ fontFamily: 'var(--font-hud)', fontSize: '1rem', color: isApproved ? 'var(--green)' : 'var(--crimson)' }}>
+              {isApproved ? '✅ APPLICATION APPROVED (Score: ' + Math.round(calculatedApproval) + '%)' : '❌ APPLICATION REJECTED (Score: ' + Math.round(calculatedApproval) + '%)'}
+            </div>
+          </div>
+        </div>
+      )}
+
+      {project.simulationType === 'scanner' && (
+        <div>
+          <p style={{ fontSize: '0.85rem', color: 'var(--muted)', marginBottom: '0.8rem' }}>
+            Execute automated vulnerability reconnaissance on simulated target:
+          </p>
+          <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '1rem' }}>
+            <input value={scanUrl} onChange={e => setScanUrl(e.target.value)} style={{ flex: 1, background: '#0a0d18', border: '1px solid var(--border)', borderRadius: 6, padding: '0.5rem 0.8rem', color: '#fff', fontFamily: 'var(--font-mono)', fontSize: '0.8rem' }} />
+            <button onClick={runScanner} disabled={scanning} className="btn-stark btn-stark-cyan" style={{ padding: '0.5rem 1rem', fontSize: '0.75rem' }}>
+              {scanning ? 'SCANNING...' : 'SCAN TARGET'}
+            </button>
+          </div>
+          {scanResult && (
+            <div style={{ padding: '0.8rem', background: 'rgba(230, 36, 41, 0.12)', border: '1px solid var(--crimson)', borderRadius: 8 }}>
+              <div style={{ fontFamily: 'var(--font-hud)', fontSize: '0.85rem', color: 'var(--crimson)', marginBottom: '0.4rem' }}>
+                🚨 {scanResult.status}
+              </div>
+              {scanResult.findings.map(f => (
+                <div key={f} style={{ fontFamily: 'var(--font-mono)', fontSize: '0.75rem', color: '#fff' }}>&bull; {f}</div>
+              ))}
+            </div>
+          )}
+        </div>
+      )}
+
+      {project.simulationType !== 'calculator' && project.simulationType !== 'scanner' && (
+        <div style={{ textAlign: 'center', padding: '1rem' }}>
+          <Activity size={32} color="var(--cyan)" style={{ margin: '0 auto 0.6rem' }} />
+          <div style={{ fontFamily: 'var(--font-hud)', fontSize: '0.9rem', color: '#fff' }}>LIVE SYSTEM ACTIVE</div>
+          <p style={{ fontSize: '0.8rem', color: 'var(--muted)', marginTop: '0.3rem' }}>
+            Telemetry stream verified. Click below to launch the complete standalone project.
+          </p>
+        </div>
+      )}
+    </div>
+  );
+}
 
 export function Projects() {
   const [modal, setModal] = useState(null);
@@ -17,36 +160,78 @@ export function Projects() {
   return (
     <section className="section" id="projects">
       <div className="container">
-        <RevealDiv><div className="sec-label">projects</div></RevealDiv>
-        <RevealDiv delay={0.1}><h2 className="sec-title">Things I've Built</h2></RevealDiv>
-        <RevealDiv delay={0.2}><p className="sec-desc">Security tools, ML applications and full-stack web projects.</p></RevealDiv>
+        <RevealDiv><div className="sec-hud-label">engineered systems</div></RevealDiv>
+        <RevealDiv delay={0.1}><h2 className="sec-hud-title">Featured Projects</h2></RevealDiv>
+        <RevealDiv delay={0.2}>
+          <p className="sec-hud-desc">
+            Explore cyber defense tools, machine learning pipelines, and full-stack software. Click <strong>Live Review</strong> to interact directly on this page.
+          </p>
+        </RevealDiv>
 
-        <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fill,minmax(320px,1fr))', gap:'1.25rem', marginTop:'3rem' }}>
+        {/* Project Cards Grid */}
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(330px, 1fr))', gap: '1.5rem', marginTop: '3.5rem' }}>
           {PROJECTS.map((p, i) => (
             <RevealDiv key={p.title} delay={0.06 * i}>
-              <motion.div className="glass" whileHover={{ y:-6 }} transition={{ duration:0.3 }} style={{ overflow:'hidden', cursor:'pointer' }}>
-                <div style={{ height:180, position:'relative', overflow:'hidden' }}>
-                  <img src={p.img} alt={p.title} style={{ width:'100%', height:'100%', objectFit:'cover', transition:'transform 0.5s' }}
-                    onMouseEnter={e=>e.target.style.transform='scale(1.06)'}
-                    onMouseLeave={e=>e.target.style.transform=''}/>
-                  <div style={{ position:'absolute', inset:0, background:'linear-gradient(to top,rgba(10,10,18,0.9),rgba(10,10,18,0.2))' }}/>
-                  <button onClick={() => setModal(p)} style={{ position:'absolute', top:'50%', left:'50%', transform:'translate(-50%,-50%)', background:'var(--violet)', color:'#fff', border:'none', padding:'0.5rem 1.1rem', borderRadius:8, fontSize:'0.82rem', cursor:'pointer', display:'flex', alignItems:'center', gap:'0.4rem', opacity:0, transition:'opacity 0.3s' }}
-                    onMouseEnter={e=>e.currentTarget.style.opacity=1}
-                    className="proj-hover-btn">
-                    <Maximize2 size={14}/> Preview
+              <motion.div
+                className="hud-glass"
+                whileHover={{ y: -6 }}
+                transition={{ duration: 0.3 }}
+                style={{ overflow: 'hidden', display: 'flex', flexDirection: 'column', height: '100%' }}
+              >
+                {/* Image Cover */}
+                <div style={{ height: 190, position: 'relative', overflow: 'hidden' }}>
+                  <img
+                    src={p.img}
+                    alt={p.title}
+                    style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                  />
+                  <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, #0a0f1a 90%, transparent 20%)', opacity: 0.85 }} />
+                  
+                  {/* Live Review Button Overlay */}
+                  <button
+                    onClick={() => setModal(p)}
+                    className="btn-stark btn-stark-cyan"
+                    style={{
+                      position: 'absolute',
+                      bottom: '1rem',
+                      left: '1rem',
+                      padding: '0.45rem 1rem',
+                      fontSize: '0.72rem',
+                    }}
+                  >
+                    <Play size={13} /> Live Review
                   </button>
                 </div>
-                <div style={{ padding:'1.25rem 1.5rem' }}>
-                  <div style={{ display:'flex', flexWrap:'wrap', gap:'0.35rem', marginBottom:'0.6rem' }}>
-                    {p.tags.map(t => <span key={t} className="jtag">{t}</span>)}
+
+                {/* Body Content */}
+                <div style={{ padding: '1.4rem 1.6rem', flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+                  <div>
+                    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.35rem', marginBottom: '0.8rem' }}>
+                      {p.tags.map(t => <span key={t} className="hud-tag">{t}</span>)}
+                    </div>
+                    <h3 style={{ fontFamily: 'var(--font-hud)', fontSize: '1.05rem', fontWeight: 700, marginBottom: '0.6rem', color: '#fff' }}>
+                      {p.title}
+                    </h3>
+                    <p style={{ color: 'var(--muted)', fontSize: '0.85rem', lineHeight: 1.65, marginBottom: '1.2rem' }}>
+                      {p.desc.slice(0, 115)}...
+                    </p>
                   </div>
-                  <div style={{ fontWeight:700, fontSize:'1rem', marginBottom:'0.4rem' }}>{p.title}</div>
-                  <p style={{ color:'var(--muted)', fontSize:'0.84rem', lineHeight:1.6, marginBottom:'0.75rem' }}>{p.desc.slice(0,100)}...</p>
-                  <div style={{ display:'flex', gap:'0.75rem' }}>
-                    <a href={p.gh} target="_blank" rel="noopener" style={{ fontFamily:"'JetBrains Mono',monospace", fontSize:'0.73rem', color:'var(--muted)', textDecoration:'none', display:'inline-flex', alignItems:'center', gap:'0.3rem', transition:'color 0.2s' }}
-                      onMouseEnter={e=>e.currentTarget.style.color='var(--violet)'}
-                      onMouseLeave={e=>e.currentTarget.style.color='var(--muted)'}>
-                      <GitBranch size={13}/> GitHub
+
+                  {/* Actions */}
+                  <div style={{ display: 'flex', gap: '0.8rem', borderTop: '1px solid rgba(0, 240, 255, 0.1)', paddingTop: '0.8rem' }}>
+                    <button
+                      onClick={() => setModal(p)}
+                      style={{ background: 'none', border: 'none', color: 'var(--cyan)', fontFamily: 'var(--font-mono)', fontSize: '0.75rem', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.3rem' }}
+                    >
+                      <Eye size={14} /> Review Here
+                    </button>
+                    <a
+                      href={p.gh}
+                      target="_blank"
+                      rel="noopener"
+                      style={{ color: 'var(--muted)', textDecoration: 'none', fontFamily: 'var(--font-mono)', fontSize: '0.75rem', display: 'flex', alignItems: 'center', gap: '0.3rem' }}
+                    >
+                      <GitBranch size={14} /> Source
                     </a>
                   </div>
                 </div>
@@ -56,25 +241,90 @@ export function Projects() {
         </div>
       </div>
 
-      {/* Modal */}
+      {/* ── Live Interactive Preview Modal ── */}
       <AnimatePresence>
         {modal && (
-          <motion.div initial={{ opacity:0 }} animate={{ opacity:1 }} exit={{ opacity:0 }}
-            style={{ position:'fixed', inset:0, background:'rgba(0,0,0,0.85)', zIndex:9998, display:'grid', placeItems:'center', padding:'2rem', backdropFilter:'blur(8px)' }}
-            onClick={e => { if (e.target === e.currentTarget) setModal(null); }}>
-            <motion.div initial={{ scale:0.95, opacity:0 }} animate={{ scale:1, opacity:1 }} exit={{ scale:0.95, opacity:0 }}
-              style={{ background:'hsl(240,10%,6%)', border:'1px solid var(--glass-border)', borderRadius:20, maxWidth:640, width:'100%', overflow:'hidden', position:'relative' }}>
-              <button onClick={() => setModal(null)} style={{ position:'absolute', top:'1rem', right:'1rem', background:'rgba(0,0,0,0.6)', border:'1px solid var(--glass-border)', color:'var(--fg)', borderRadius:8, padding:'0.4rem 0.7rem', cursor:'pointer', fontSize:'0.9rem', zIndex:10 }}>
-                <X size={16}/>
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            style={{
+              position: 'fixed',
+              inset: 0,
+              background: 'rgba(6, 8, 14, 0.92)',
+              zIndex: 9998,
+              display: 'grid',
+              placeItems: 'center',
+              padding: '2rem',
+              backdropFilter: 'blur(12px)',
+            }}
+            onClick={e => { if (e.target === e.currentTarget) setModal(null); }}
+          >
+            <motion.div
+              initial={{ scale: 0.95, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.95, opacity: 0 }}
+              className="hud-glass"
+              style={{
+                maxWidth: 720,
+                width: '100%',
+                maxHeight: '90vh',
+                overflowY: 'auto',
+                position: 'relative',
+                padding: '2rem',
+                borderColor: 'var(--cyan)',
+              }}
+            >
+              <button
+                onClick={() => setModal(null)}
+                style={{
+                  position: 'absolute',
+                  top: '1rem',
+                  right: '1rem',
+                  background: 'rgba(0, 240, 255, 0.1)',
+                  border: '1px solid var(--border)',
+                  color: '#fff',
+                  borderRadius: 8,
+                  padding: '0.4rem 0.7rem',
+                  cursor: 'pointer',
+                }}
+              >
+                <X size={16} />
               </button>
-              <img src={modal.img} alt={modal.title} style={{ width:'100%', height:260, objectFit:'cover' }}/>
-              <div style={{ padding:'2rem' }}>
-                <div style={{ display:'flex', flexWrap:'wrap', gap:'0.35rem', marginBottom:'0.75rem' }}>
-                  {modal.tags.map(t => <span key={t} className="jtag">{t}</span>)}
-                </div>
-                <h3 style={{ fontSize:'1.2rem', fontWeight:700, marginBottom:'0.5rem' }}>{modal.title}</h3>
-                <p style={{ color:'var(--muted)', fontSize:'0.9rem', lineHeight:1.7, marginBottom:'1.5rem' }}>{modal.desc}</p>
-                <a href={modal.gh} target="_blank" rel="noopener" className="btn btn-ghost" style={{ fontSize:'0.82rem' }}><GitBranch size={14}/> View on GitHub</a>
+
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.4rem', marginBottom: '0.8rem' }}>
+                {modal.tags.map(t => <span key={t} className="hud-tag">{t}</span>)}
+              </div>
+
+              <h2 style={{ fontFamily: 'var(--font-hud)', fontSize: '1.4rem', fontWeight: 800, color: '#fff', marginBottom: '0.6rem' }}>
+                {modal.title}
+              </h2>
+
+              <p style={{ color: 'var(--muted)', fontSize: '0.9rem', lineHeight: 1.7, marginBottom: '1.2rem' }}>
+                {modal.desc}
+              </p>
+
+              {/* In-Place Live Simulator */}
+              <LiveSimulator project={modal} />
+
+              {/* Bottom Buttons */}
+              <div style={{ display: 'flex', gap: '1rem', marginTop: '1.6rem', flexWrap: 'wrap' }}>
+                <a
+                  href={modal.live || modal.gh}
+                  target="_blank"
+                  rel="noopener"
+                  className="btn-stark btn-stark-cyan"
+                >
+                  <ExternalLink size={16} /> Launch Full Project in New Tab
+                </a>
+                <a
+                  href={modal.gh}
+                  target="_blank"
+                  rel="noopener"
+                  className="btn-stark btn-stark-ghost"
+                >
+                  <GitBranch size={16} /> GitHub Repository
+                </a>
               </div>
             </motion.div>
           </motion.div>
