@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { ExternalLink, GitBranch, X, Play, Eye, CheckCircle2, Sliders, ShieldAlert, Activity } from 'lucide-react';
+import { ExternalLink, GitBranch, X, Play, Eye, Activity, CheckCircle2, Code2 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { RevealDiv } from '../components/RevealDiv';
 
@@ -9,58 +9,67 @@ const PROJECTS = [
     title: 'Credit Card Approval Prediction System',
     desc: 'Machine Learning classification pipeline engineered using logistic regression and decision tree classifiers to predict credit card application approvals with feature importance analysis and ROC-AUC evaluation.',
     tags: ['Python', 'Scikit-Learn', 'Pandas', 'Classification', 'ML'],
-    img: 'https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=600&auto=format&fit=crop&q=80',
-    gh: 'https://github.com/Sathvikpolipati',
+    img: 'https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=800&auto=format&fit=crop&q=85',
+    gh: 'https://github.com/Sathvikpolipati/SathvikPolipati-Portfolio',
     live: 'https://sathvikpolipati.github.io/SathvikPolipati-Portfolio/',
-    simulationType: 'calculator'
+    simulationType: 'calculator',
+    repoName: 'Credit-Card-Approval-Prediction',
+    files: ['model.py', 'preprocess.py', 'dataset.csv', 'requirements.txt']
   },
   {
     id: 'rising-water',
     title: 'Rising Water — Flood Prediction & Early Warning',
     desc: 'IoT and predictive data simulation system tracking water levels, historical rain telemetry, and generating automated flood risk hazard alerts.',
     tags: ['Python', 'Data Analytics', 'Simulation', 'IoT', 'Risk Model'],
-    img: 'https://images.unsplash.com/photo-1547036967-23d11aacaee0?w=600&auto=format&fit=crop&q=80',
-    gh: 'https://github.com/Sathvikpolipati',
+    img: 'https://images.unsplash.com/photo-1547036967-23d11aacaee0?w=800&auto=format&fit=crop&q=85',
+    gh: 'https://github.com/Sathvikpolipati/SathvikPolipati-Portfolio',
     live: 'https://sathvikpolipati.github.io/SathvikPolipati-Portfolio/',
-    simulationType: 'flood'
+    simulationType: 'flood',
+    repoName: 'Rising-Water-Flood-Warning',
+    files: ['sensor_stream.py', 'water_level_model.py', 'alert_service.py']
   },
   {
     id: 'vuln-scanner',
     title: 'Automated Web Vulnerability Scanner',
     desc: 'Python offensive security tool automated for detecting OWASP vulnerabilities (SQL Injection, Stored/Reflected XSS, Open Redirects) with HTTP headers inspection.',
     tags: ['Python', 'OWASP', 'Penetration Testing', 'Security', 'Automation'],
-    img: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=600&auto=format&fit=crop&q=80',
-    gh: 'https://github.com/Sathvikpolipati',
+    img: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=800&auto=format&fit=crop&q=85',
+    gh: 'https://github.com/Sathvikpolipati/SathvikPolipati-Portfolio',
     live: 'https://sathvikpolipati.github.io/SathvikPolipati-Portfolio/',
-    simulationType: 'scanner'
+    simulationType: 'scanner',
+    repoName: 'Web-Vulnerability-Scanner',
+    files: ['scanner.py', 'payloads.json', 'reporter.py', 'crawler.py']
   },
   {
     id: 'traffic-analyser',
     title: 'Network Traffic Analyser & Packet Monitor',
     desc: 'Real-time network traffic sniffer built on Python Scapy to intercept packets, decode protocols, detect suspicious port scan activities, and log anomalies.',
     tags: ['Python', 'Scapy', 'Packet Analysis', 'Network Security'],
-    img: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=600&auto=format&fit=crop&q=80',
-    gh: 'https://github.com/Sathvikpolipati',
+    img: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&auto=format&fit=crop&q=85',
+    gh: 'https://github.com/Sathvikpolipati/SathvikPolipati-Portfolio',
     live: 'https://sathvikpolipati.github.io/SathvikPolipati-Portfolio/',
-    simulationType: 'sniffer'
+    simulationType: 'sniffer',
+    repoName: 'Network-Traffic-Analyser',
+    files: ['sniffer.py', 'packet_parser.py', 'signature_detector.py']
   },
   {
     id: 'portfolio-upgrade',
     title: 'Soul Reaper Cyber Portfolio (Iron Man HUD)',
     desc: 'Full-stack reactive portfolio built with React, Vite, Tailwind CSS, Arc Reactor animations, interactive radar chart, dynamic tech orbit, and Vercel cloud deployment.',
     tags: ['React', 'Vite', 'Framer Motion', 'Tailwind', 'Canvas'],
-    img: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&auto=format&fit=crop&q=80',
+    img: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&auto=format&fit=crop&q=85',
     gh: 'https://github.com/Sathvikpolipati/SathvikPolipati-Portfolio',
     live: 'https://sathvikpolipati.github.io/SathvikPolipati-Portfolio/',
-    simulationType: 'portfolio'
+    simulationType: 'portfolio',
+    repoName: 'SathvikPolipati-Portfolio',
+    files: ['src/App.jsx', 'src/sections/TechOrbit.jsx', 'src/sections/RadarChart.jsx']
   },
 ];
 
 function LiveSimulator({ project }) {
-  // Interactive Simulation Sandbox State
   const [income, setIncome] = useState(65000);
   const [creditScore, setCreditScore] = useState(720);
-  const [scanUrl, setScanUrl] = useState('https://target-bank-demo.local/login');
+  const [scanUrl, setScanUrl] = useState('https://demo-bank-target.local/auth');
   const [scanning, setScanning] = useState(false);
   const [scanResult, setScanResult] = useState(null);
 
@@ -70,30 +79,44 @@ function LiveSimulator({ project }) {
     setTimeout(() => {
       setScanning(false);
       setScanResult({
-        status: 'VULNERABILITY DETECTED',
+        status: 'VULNERABILITY DETECTED // HIGH RISK',
         findings: [
-          'SQLi vulnerable parameter: ?id=1',
-          'XSS Reflected in error handler',
-          'Missing Content-Security-Policy (CSP)'
+          'SQL Injection in query parameter ?account_id=1024',
+          'Reflected Cross-Site Scripting (XSS) in user agent header',
+          'Missing Content-Security-Policy (CSP) & Strict-Transport-Security'
         ]
       });
-    }, 1800);
+    }, 1500);
   };
 
   const calculatedApproval = (income / 1000) * 0.4 + (creditScore / 850) * 60;
   const isApproved = calculatedApproval > 55;
 
   return (
-    <div style={{ background: '#070a12', border: '1px solid rgba(0, 240, 255, 0.3)', borderRadius: 12, padding: '1.5rem', marginTop: '1.2rem' }}>
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1rem', borderBottom: '1px solid rgba(0, 240, 255, 0.15)', paddingBottom: '0.6rem' }}>
-        <span style={{ fontFamily: 'var(--font-hud)', fontSize: '0.8rem', color: 'var(--cyan)' }}>
-          ⚡ LIVE PROJECT SANDBOX &bull; INTERACTIVE TELEMETRY
-        </span>
+    <div style={{ background: '#05070e', border: '1px solid rgba(0, 240, 255, 0.35)', borderRadius: 12, padding: '1.5rem', marginTop: '1.2rem' }}>
+      {/* GitHub Repository Live Header */}
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1.2rem', borderBottom: '1px solid rgba(0, 240, 255, 0.15)', paddingBottom: '0.8rem', flexWrap: 'wrap', gap: '0.5rem' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+          <GitBranch size={16} color="var(--cyan)" />
+          <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.82rem', color: '#fff', fontWeight: 600 }}>
+            Sathvikpolipati/{project.repoName}
+          </span>
+        </div>
         <span className="hud-tag" style={{ borderColor: 'var(--green)', color: 'var(--green)' }}>
-          STATUS: RUNNING
+          ⚡ GITHUB LIVE REPO SYNC
         </span>
       </div>
 
+      {/* Repo Files Telemetry */}
+      <div style={{ display: 'flex', gap: '0.4rem', flexWrap: 'wrap', marginBottom: '1.2rem' }}>
+        {project.files.map(f => (
+          <span key={f} style={{ fontFamily: 'var(--font-mono)', fontSize: '0.68rem', background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', padding: '0.15rem 0.5rem', borderRadius: 4, color: 'var(--muted)' }}>
+            📄 {f}
+          </span>
+        ))}
+      </div>
+
+      {/* Live Interactive Sandbox Component */}
       {project.simulationType === 'calculator' && (
         <div>
           <p style={{ fontSize: '0.85rem', color: 'var(--muted)', marginBottom: '1rem' }}>
@@ -101,11 +124,15 @@ function LiveSimulator({ project }) {
           </p>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', marginBottom: '1rem' }}>
             <div>
-              <label style={{ fontFamily: 'var(--font-mono)', fontSize: '0.75rem', color: '#fff' }}>Annual Income: ${income.toLocaleString()}</label>
+              <label style={{ fontFamily: 'var(--font-mono)', fontSize: '0.75rem', color: '#fff' }}>
+                Annual Income: ${income.toLocaleString()}
+              </label>
               <input type="range" min="15000" max="180000" step="5000" value={income} onChange={e => setIncome(+e.target.value)} style={{ width: '100%', accentColor: 'var(--cyan)' }} />
             </div>
             <div>
-              <label style={{ fontFamily: 'var(--font-mono)', fontSize: '0.75rem', color: '#fff' }}>Credit Score: {creditScore}</label>
+              <label style={{ fontFamily: 'var(--font-mono)', fontSize: '0.75rem', color: '#fff' }}>
+                Credit Score: {creditScore}
+              </label>
               <input type="range" min="400" max="850" step="10" value={creditScore} onChange={e => setCreditScore(+e.target.value)} style={{ width: '100%', accentColor: 'var(--gold)' }} />
             </div>
           </div>
@@ -120,7 +147,7 @@ function LiveSimulator({ project }) {
       {project.simulationType === 'scanner' && (
         <div>
           <p style={{ fontSize: '0.85rem', color: 'var(--muted)', marginBottom: '0.8rem' }}>
-            Execute automated vulnerability reconnaissance on simulated target:
+            Execute automated vulnerability reconnaissance on target host:
           </p>
           <div style={{ display: 'flex', gap: '0.5rem', marginBottom: '1rem' }}>
             <input value={scanUrl} onChange={e => setScanUrl(e.target.value)} style={{ flex: 1, background: '#0a0d18', border: '1px solid var(--border)', borderRadius: 6, padding: '0.5rem 0.8rem', color: '#fff', fontFamily: 'var(--font-mono)', fontSize: '0.8rem' }} />
@@ -144,9 +171,9 @@ function LiveSimulator({ project }) {
       {project.simulationType !== 'calculator' && project.simulationType !== 'scanner' && (
         <div style={{ textAlign: 'center', padding: '1rem' }}>
           <Activity size={32} color="var(--cyan)" style={{ margin: '0 auto 0.6rem' }} />
-          <div style={{ fontFamily: 'var(--font-hud)', fontSize: '0.9rem', color: '#fff' }}>LIVE SYSTEM ACTIVE</div>
+          <div style={{ fontFamily: 'var(--font-hud)', fontSize: '0.9rem', color: '#fff' }}>GITHUB LIVE TELEMETRY ACTIVE</div>
           <p style={{ fontSize: '0.8rem', color: 'var(--muted)', marginTop: '0.3rem' }}>
-            Telemetry stream verified. Click below to launch the complete standalone project.
+            Source repository ready. Click below to inspect complete live codebase on GitHub.
           </p>
         </div>
       )}
@@ -169,7 +196,7 @@ export function Projects() {
         </RevealDiv>
 
         {/* Project Cards Grid */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(330px, 1fr))', gap: '1.5rem', marginTop: '3.5rem' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(330px, 1fr))', gap: '1.6rem', marginTop: '3.5rem' }}>
           {PROJECTS.map((p, i) => (
             <RevealDiv key={p.title} delay={0.06 * i}>
               <motion.div
@@ -178,29 +205,52 @@ export function Projects() {
                 transition={{ duration: 0.3 }}
                 style={{ overflow: 'hidden', display: 'flex', flexDirection: 'column', height: '100%' }}
               >
-                {/* Image Cover */}
-                <div style={{ height: 190, position: 'relative', overflow: 'hidden' }}>
+                {/* ── Clear, High-Res Project Cover Image (No dark overlay!) ── */}
+                <div
+                  onClick={() => setModal(p)}
+                  style={{
+                    height: 205,
+                    position: 'relative',
+                    overflow: 'hidden',
+                    cursor: 'pointer',
+                    background: '#0a0d18',
+                    borderBottom: '1px solid rgba(0, 240, 255, 0.15)',
+                  }}
+                >
                   <img
                     src={p.img}
                     alt={p.title}
-                    style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-                  />
-                  <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, #0a0f1a 90%, transparent 20%)', opacity: 0.85 }} />
-                  
-                  {/* Live Review Button Overlay */}
-                  <button
-                    onClick={() => setModal(p)}
-                    className="btn-stark btn-stark-cyan"
                     style={{
-                      position: 'absolute',
-                      bottom: '1rem',
-                      left: '1rem',
-                      padding: '0.45rem 1rem',
-                      fontSize: '0.72rem',
+                      width: '100%',
+                      height: '100%',
+                      objectFit: 'cover',
+                      transition: 'transform 0.4s ease',
+                      filter: 'contrast(1.05) brightness(1.02)',
                     }}
-                  >
-                    <Play size={13} /> Live Review
-                  </button>
+                    onMouseEnter={e => e.currentTarget.style.transform = 'scale(1.05)'}
+                    onMouseLeave={e => e.currentTarget.style.transform = 'scale(1)'}
+                  />
+
+                  {/* Clean Live Review Action Pill */}
+                  <div style={{
+                    position: 'absolute',
+                    bottom: '0.8rem',
+                    left: '0.8rem',
+                    zIndex: 2,
+                  }}>
+                    <button
+                      onClick={(e) => { e.stopPropagation(); setModal(p); }}
+                      className="btn-stark btn-stark-cyan"
+                      style={{
+                        padding: '0.4rem 0.9rem',
+                        fontSize: '0.72rem',
+                        borderRadius: 100,
+                        boxShadow: '0 4px 15px rgba(0, 0, 0, 0.7)',
+                      }}
+                    >
+                      <Play size={12} /> Live Review
+                    </button>
+                  </div>
                 </div>
 
                 {/* Body Content */}
@@ -209,11 +259,14 @@ export function Projects() {
                     <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.35rem', marginBottom: '0.8rem' }}>
                       {p.tags.map(t => <span key={t} className="hud-tag">{t}</span>)}
                     </div>
-                    <h3 style={{ fontFamily: 'var(--font-hud)', fontSize: '1.05rem', fontWeight: 700, marginBottom: '0.6rem', color: '#fff' }}>
+                    <h3
+                      onClick={() => setModal(p)}
+                      style={{ fontFamily: 'var(--font-hud)', fontSize: '1.08rem', fontWeight: 700, marginBottom: '0.6rem', color: '#fff', cursor: 'pointer' }}
+                    >
                       {p.title}
                     </h3>
                     <p style={{ color: 'var(--muted)', fontSize: '0.85rem', lineHeight: 1.65, marginBottom: '1.2rem' }}>
-                      {p.desc.slice(0, 115)}...
+                      {p.desc.slice(0, 120)}...
                     </p>
                   </div>
 
@@ -231,7 +284,7 @@ export function Projects() {
                       rel="noopener"
                       style={{ color: 'var(--muted)', textDecoration: 'none', fontFamily: 'var(--font-mono)', fontSize: '0.75rem', display: 'flex', alignItems: 'center', gap: '0.3rem' }}
                     >
-                      <GitBranch size={14} /> Source
+                      <GitBranch size={14} /> GitHub
                     </a>
                   </div>
                 </div>
@@ -251,7 +304,7 @@ export function Projects() {
             style={{
               position: 'fixed',
               inset: 0,
-              background: 'rgba(6, 8, 14, 0.92)',
+              background: 'rgba(6, 8, 14, 0.94)',
               zIndex: 9998,
               display: 'grid',
               placeItems: 'center',
@@ -266,12 +319,12 @@ export function Projects() {
               exit={{ scale: 0.95, opacity: 0 }}
               className="hud-glass"
               style={{
-                maxWidth: 720,
+                maxWidth: 740,
                 width: '100%',
                 maxHeight: '90vh',
                 overflowY: 'auto',
                 position: 'relative',
-                padding: '2rem',
+                padding: '2.2rem',
                 borderColor: 'var(--cyan)',
               }}
             >
@@ -310,20 +363,20 @@ export function Projects() {
               {/* Bottom Buttons */}
               <div style={{ display: 'flex', gap: '1rem', marginTop: '1.6rem', flexWrap: 'wrap' }}>
                 <a
-                  href={modal.live || modal.gh}
+                  href={modal.gh}
                   target="_blank"
                   rel="noopener"
                   className="btn-stark btn-stark-cyan"
                 >
-                  <ExternalLink size={16} /> Launch Full Project in New Tab
+                  <ExternalLink size={16} /> Open GitHub Live Project
                 </a>
                 <a
-                  href={modal.gh}
+                  href={modal.live || modal.gh}
                   target="_blank"
                   rel="noopener"
                   className="btn-stark btn-stark-ghost"
                 >
-                  <GitBranch size={16} /> GitHub Repository
+                  <GitBranch size={16} /> Inspect Source Code
                 </a>
               </div>
             </motion.div>

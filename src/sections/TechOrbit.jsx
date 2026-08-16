@@ -1,51 +1,117 @@
 import { useState } from 'react';
 import { RevealDiv } from '../components/RevealDiv';
-import { Shield, Terminal, Cpu, Globe, Wrench, Layers, Zap } from 'lucide-react';
 
-const TECH_LAYERS = [
+const ORBITS = [
   {
     tier: 'CORE ARCHITECTURE',
-    radius: 115,
-    speed: 18,
-    color: 'var(--cyan)',
+    radius: 110,
+    duration: 14,
+    color: '#00f0ff',
     progress: 92,
     items: [
-      { name: 'Python', icon: '🐍', spec: 'Offensive scripts, Scapy, ML pipelines', level: '95%', color: '#00f0ff' },
-      { name: 'JavaScript', icon: '⚡', spec: 'Interactive UI, DOM manipulation, APIs', level: '85%', color: '#ffd700' },
-      { name: 'C / C++', icon: '⚙️', spec: 'Memory management, low-level architecture', level: '78%', color: '#0088ff' },
-      { name: 'HTML5 / CSS3', icon: '🌐', spec: 'Cyber HUD design, modern responsive UI', level: '90%', color: '#ff3344' },
+      { name: 'Python', icon: '🐍', spec: 'Offensive scripts, Scapy, ML pipelines', level: '95%', deg: 0, color: '#00f0ff' },
+      { name: 'JavaScript', icon: '⚡', spec: 'Interactive UI, DOM manipulation, APIs', level: '88%', deg: 90, color: '#ffd700' },
+      { name: 'C / C++', icon: '⚙️', spec: 'Memory management, low-level architecture', level: '78%', deg: 180, color: '#0088ff' },
+      { name: 'HTML5 / CSS3', icon: '🌐', spec: 'Cyber HUD design, modern responsive UI', level: '90%', deg: 270, color: '#ff3344' },
     ]
   },
   {
     tier: 'OFFENSIVE CYBER SECURITY',
-    radius: 195,
-    speed: 26,
-    color: 'var(--crimson)',
+    radius: 190,
+    duration: 22,
+    color: '#e62429',
     progress: 88,
     items: [
-      { name: 'Burp Suite', icon: '🛡️', spec: 'OWASP Top 10 vulnerabilities & proxy labs', level: '86%', color: '#ff5500' },
-      { name: 'Kali Linux', icon: '🐉', spec: 'Primary OS for ethical hacking & pentesting', level: '92%', color: '#00f0ff' },
-      { name: 'Nmap', icon: '🔍', spec: 'Network reconnaissance, NSE scripting', level: '88%', color: '#00ff88' },
-      { name: 'Metasploit', icon: '🎯', spec: 'Payload crafting & exploitation framework', level: '80%', color: '#ff3344' },
-      { name: 'Wireshark', icon: '📡', spec: 'Protocol dissection & packet analysis', level: '84%', color: '#0088ff' },
+      { name: 'Burp Suite', icon: '🛡️', spec: 'OWASP Top 10 vulnerabilities & proxy labs', level: '86%', deg: 0, color: '#ff5500' },
+      { name: 'Kali Linux', icon: '🐉', spec: 'Primary OS for ethical hacking & pentesting', level: '92%', deg: 72, color: '#00f0ff' },
+      { name: 'Nmap', icon: '🔍', spec: 'Network reconnaissance, NSE scripting', level: '88%', deg: 144, color: '#00ff88' },
+      { name: 'Metasploit', icon: '🎯', spec: 'Payload crafting & exploitation framework', level: '80%', deg: 216, color: '#ff3344' },
+      { name: 'Wireshark', icon: '📡', spec: 'Protocol dissection & packet analysis', level: '84%', deg: 288, color: '#0088ff' },
     ]
   },
   {
     tier: 'CLOUD, ML & DEV TOOLS',
-    radius: 280,
-    speed: 38,
-    color: 'var(--gold)',
+    radius: 270,
+    duration: 32,
+    color: '#ffb703',
     progress: 84,
     items: [
-      { name: 'React.js', icon: '⚛️', spec: 'Component frameworks & dynamic state', level: '85%', color: '#00d8ff' },
-      { name: 'Scikit-Learn', icon: '🤖', spec: 'Machine learning algorithms & classifiers', level: '80%', color: '#ffd700' },
-      { name: 'Firebase', icon: '🔥', spec: 'Cloud Firestore & real-time sync', level: '82%', color: '#ff9900' },
-      { name: 'MySQL', icon: '🐬', spec: 'Relational data queries & injection tests', level: '80%', color: '#00758f' },
-      { name: 'Git & GitHub', icon: '🐙', spec: 'Version control, automated CI/CD', level: '90%', color: '#ffffff' },
-      { name: 'Scapy', icon: '📦', spec: 'Packet manipulation & network scanning', level: '86%', color: '#00ff88' },
+      { name: 'React.js', icon: '⚛️', spec: 'Component frameworks & dynamic state', level: '85%', deg: 0, color: '#00d8ff' },
+      { name: 'Scikit-Learn', icon: '🤖', spec: 'Machine learning algorithms & classifiers', level: '80%', deg: 60, color: '#ffd700' },
+      { name: 'Firebase', icon: '🔥', spec: 'Cloud Firestore & real-time sync', level: '82%', deg: 120, color: '#ff9900' },
+      { name: 'MySQL', icon: '🐬', spec: 'Relational data queries & injection tests', level: '80%', deg: 180, color: '#00758f' },
+      { name: 'Git & GitHub', icon: '🐙', spec: 'Version control, automated CI/CD', level: '90%', deg: 240, color: '#ffffff' },
+      { name: 'Scapy', icon: '📦', spec: 'Packet manipulation & network scanning', level: '86%', deg: 300, color: '#00ff88' },
     ]
   }
 ];
+
+function OrbitRing({ radius, duration, items, reverse, isPaused, onSelect }) {
+  const size = radius * 2 + 56;
+  return (
+    <div style={{
+      position: 'absolute',
+      width: size,
+      height: size,
+      top: '50%',
+      left: '50%',
+      transform: 'translate(-50%, -50%)',
+      border: '1.5px dashed rgba(0, 240, 255, 0.22)',
+      borderRadius: '50%',
+      boxShadow: '0 0 25px rgba(0, 240, 255, 0.05), inset 0 0 15px rgba(0, 240, 255, 0.03)',
+      animation: `${reverse ? 'spin-ccw' : 'spin-cw'} ${duration}s linear infinite`,
+      animationPlayState: isPaused ? 'paused' : 'running',
+    }}>
+      {items.map(item => {
+        const rad = (item.deg * Math.PI) / 180;
+        const x = radius * Math.cos(rad);
+        const y = radius * Math.sin(rad);
+        return (
+          <div
+            key={item.name}
+            title={item.name}
+            onMouseEnter={() => onSelect(item)}
+            style={{
+              position: 'absolute',
+              left: '50%',
+              top: '50%',
+              transform: `translate(calc(-50% + ${x}px), calc(-50% + ${y}px))`,
+              animation: `${reverse ? 'spin-cw' : 'spin-ccw'} ${duration}s linear infinite`,
+              animationPlayState: isPaused ? 'paused' : 'running',
+            }}
+          >
+            <div
+              style={{
+                width: 44,
+                height: 44,
+                borderRadius: '50%',
+                background: '#0a0f1a',
+                border: `1.5px solid ${item.color}`,
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                fontSize: '1.25rem',
+                cursor: 'pointer',
+                boxShadow: `0 0 12px ${item.color}55`,
+                transition: 'transform 0.2s, box-shadow 0.2s',
+              }}
+              onMouseEnter={e => {
+                e.currentTarget.style.transform = 'scale(1.25)';
+                e.currentTarget.style.boxShadow = `0 0 22px ${item.color}`;
+              }}
+              onMouseLeave={e => {
+                e.currentTarget.style.transform = 'scale(1)';
+                e.currentTarget.style.boxShadow = `0 0 12px ${item.color}55`;
+              }}
+            >
+              {item.icon}
+            </div>
+          </div>
+        );
+      })}
+    </div>
+  );
+}
 
 export function TechOrbit() {
   const [activeItem, setActiveItem] = useState(null);
@@ -55,7 +121,7 @@ export function TechOrbit() {
     <section className="section" id="orbit" style={{ overflow: 'hidden' }}>
       <div className="container">
         <RevealDiv><div className="sec-hud-label">holographic telemetry</div></RevealDiv>
-        <RevealDiv delay={0.1}><h2 className="sec-hud-title">Arc Reactor Tech Orbit</h2></RevealDiv>
+        <RevealDiv delay={0.1}><h2 className="sec-hud-title">Soul Reaper Tech Orbit</h2></RevealDiv>
         <RevealDiv delay={0.2}>
           <p className="sec-hud-desc">
             A dynamic orbital telemetry display powered by the Kali Linux security core. Hover any node to inspect operational parameters.
@@ -65,7 +131,7 @@ export function TechOrbit() {
         {/* ── Interactive Progress Line Meter ── */}
         <RevealDiv delay={0.3} style={{ marginTop: '2rem' }}>
           <div className="hud-glass" style={{ padding: '1.2rem 1.8rem', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '1.5rem' }}>
-            {TECH_LAYERS.map((layer) => (
+            {ORBITS.map((layer) => (
               <div key={layer.tier}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.4rem', fontFamily: 'var(--font-mono)', fontSize: '0.72rem' }}>
                   <span style={{ color: layer.color, letterSpacing: '0.05em' }}>{layer.tier}</span>
@@ -86,7 +152,7 @@ export function TechOrbit() {
           </div>
         </RevealDiv>
 
-        {/* ── Orbit Canvas Container ── */}
+        {/* ── Orbit Canvas Container with Connected Circular Lines ── */}
         <div style={{
           display: 'flex',
           flexDirection: 'column',
@@ -109,12 +175,12 @@ export function TechOrbit() {
           >
             {/* ── Central Kali Linux Security Core ── */}
             <div style={{
-              width: 110,
-              height: 110,
+              width: 105,
+              height: 105,
               borderRadius: '50%',
               background: 'radial-gradient(circle, #0d1b2a 0%, #001220 60%, #06080e 100%)',
               border: '3px solid #00f0ff',
-              boxShadow: '0 0 40px rgba(0, 240, 255, 0.8), inset 0 0 25px rgba(0, 240, 255, 0.6)',
+              boxShadow: '0 0 35px rgba(0, 240, 255, 0.8), inset 0 0 20px rgba(0, 240, 255, 0.6)',
               display: 'flex',
               flexDirection: 'column',
               alignItems: 'center',
@@ -129,61 +195,16 @@ export function TechOrbit() {
               </span>
             </div>
 
-            {/* ── Concentric Orbit Rings with Progress Glow ── */}
-            {TECH_LAYERS.map((layer, lIdx) => {
-              const size = layer.radius * 2;
-              const reverse = lIdx % 2 === 1;
-              return (
-                <div
-                  key={layer.tier}
-                  style={{
-                    position: 'absolute',
-                    width: size,
-                    height: size,
-                    borderRadius: '50%',
-                    border: `1.5px dashed ${layer.color}44`,
-                    boxShadow: `0 0 25px ${layer.color}15, inset 0 0 20px ${layer.color}08`,
-                    animation: `${reverse ? 'spin-ccw' : 'spin-cw'} ${layer.speed}s linear infinite`,
-                    animationPlayState: isPaused ? 'paused' : 'running',
-                  }}
-                >
-                  {/* Orbit Nodes */}
-                  {layer.items.map((it, iIdx) => {
-                    const angle = (iIdx / layer.items.length) * 2 * Math.PI;
-                    const x = layer.radius + layer.radius * Math.cos(angle) - 22;
-                    const y = layer.radius + layer.radius * Math.sin(angle) - 22;
-
-                    return (
-                      <div
-                        key={it.name}
-                        onMouseEnter={() => setActiveItem(it)}
-                        style={{
-                          position: 'absolute',
-                          left: x,
-                          top: y,
-                          width: 44,
-                          height: 44,
-                          borderRadius: '50%',
-                          background: '#0a0f1a',
-                          border: `1.5px solid ${it.color}`,
-                          display: 'flex',
-                          alignItems: 'center',
-                          justifyContent: 'center',
-                          fontSize: '1.25rem',
-                          cursor: 'pointer',
-                          boxShadow: `0 0 14px ${it.color}66`,
-                          animation: `${reverse ? 'spin-cw' : 'spin-ccw'} ${layer.speed}s linear infinite`,
-                          animationPlayState: isPaused ? 'paused' : 'running',
-                          transition: 'transform 0.2s, box-shadow 0.2s',
-                        }}
-                      >
-                        {it.icon}
-                      </div>
-                    );
-                  })}
-                </div>
-              );
-            })}
+            {/* ── Concentric Connected Circular Orbit Rings ── */}
+            {ORBITS.map((o, i) => (
+              <OrbitRing
+                key={o.tier}
+                {...o}
+                reverse={i % 2 === 1}
+                isPaused={isPaused}
+                onSelect={setActiveItem}
+              />
+            ))}
           </div>
 
           {/* ── Active Inspection HUD Card ── */}
