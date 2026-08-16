@@ -6,8 +6,7 @@
   
   <p>
     <a href="https://sathvikpolipati.github.io/-Sathvik-Portfolio/">🌐 <strong>Live GitHub Portfolio</strong></a> &bull;
-    <a href="https://sathvik-portfolio-gamma.vercel.app">⚡ <strong>Live Vercel Mirror</strong></a> &bull;
-    <a href="https://linkedin.com/in/sathvik-polipati">💼 <strong>LinkedIn</strong></a> &bull;
+        <a href="https://linkedin.com/in/sathvik-polipati">💼 <strong>LinkedIn</strong></a> &bull;
     <a href="https://tryhackme.com/p/ultimatealienx401">💀 <strong>TryHackMe</strong></a>
   </p>
 </div>
