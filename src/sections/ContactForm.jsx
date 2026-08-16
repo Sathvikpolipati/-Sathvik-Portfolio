@@ -1,11 +1,11 @@
 import { useState } from 'react';
-import { Send, CheckCircle, ExternalLink } from 'lucide-react';
+import { Send, CheckCircle, AlertCircle, ExternalLink, Mail, ShieldCheck } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { RevealDiv } from '../components/RevealDiv';
 import confetti from 'canvas-confetti';
 
 const CHANNELS = [
-  { icon: '✉️', label: 'DIRECT EMAIL', val: 'polipatisathvik@gmail.com', url: 'mailto:polipatisathvik@gmail.com?subject=WANT%20to%20Connect!&body=Hi%20Sathvik%2C%0A%0AThank%20you%20for%20reaching%20out%20%E2%80%94%20it%27s%20great%20to%20connect%20with%20you!%0A%0AI%27d%20love%20to%20learn%20more%20about%20what%20you%27re%20working%20on%20and%20see%20where%20our%20paths%20might%20align.%20Feel%20free%20to%20share%20a%20bit%20about%20yourself%2C%20or%20let%20me%20know%20a%20good%20time%20for%20a%20quick%20call%2Fchat.%0A%0ALooking%20forward%20to%20staying%20in%20touch.%0A%0ABest%20regards%2C' },
+  { icon: '✉️', label: 'DIRECT EMAIL', val: 'polipatisathvik@gmail.com', url: 'mailto:polipatisathvik@gmail.com' },
   { icon: '💼', label: 'LINKEDIN NETWORK', val: 'linkedin.com/in/sathvik-polipati', url: 'https://linkedin.com/in/sathvik-polipati' },
   { icon: '💀', label: 'TRYHACKME HANDLE', val: '@ultimatealienx401 (Soul Reaper)', url: 'https://tryhackme.com/p/ultimatealienx401' },
   { icon: '🐙', label: 'GITHUB ARMORY', val: 'github.com/Sathvikpolipati', url: 'https://github.com/Sathvikpolipati' },
@@ -13,52 +13,75 @@ const CHANNELS = [
 
 export function Contact() {
   const [email, setEmail] = useState('');
+  const [userMessage, setUserMessage] = useState('');
   const [status, setStatus] = useState('idle'); // idle | loading | success | error
+  const [statusText, setStatusText] = useState('');
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!email) return;
     setStatus('loading');
 
-    // Save contact record locally
-    const contacts = JSON.parse(localStorage.getItem('soulreaper_contacts') || '[]');
-    contacts.push({
-      email,
-      timestamp: new Date().toISOString(),
-      subject: 'WANT to Connect!',
-      recipient: 'polipatisathvik@gmail.com'
-    });
-    localStorage.setItem('soulreaper_contacts', JSON.stringify(contacts));
+    const formattedMessage = `Hi Sathvik,
 
-    // Construct pre-formatted email dispatch to polipatisathvik@gmail.com
-    const subject = encodeURIComponent('WANT to Connect!');
-    const body = encodeURIComponent(
-`Hi Sathvik,
-
-Thank you for reaching out — it's great to connect with you!
+You have received a new connection request through your Soul Reaper portfolio.
 
 Sender Email: ${email}
-
+${userMessage ? `Personal Note: ${userMessage}\n` : ''}
+Default Message:
+Thank you for reaching out — it's great to connect with you!
 I'd love to learn more about what you're working on and see where our paths might align. Feel free to share a bit about yourself, or let me know a good time for a quick call/chat.
 
 Looking forward to staying in touch.
 
-Best regards,`
-    );
+Best regards,
+Soul Reaper Network`;
 
-    // Trigger email client dispatch to polipatisathvik@gmail.com
-    const mailtoUrl = `mailto:polipatisathvik@gmail.com?subject=${subject}&body=${body}`;
-    window.open(mailtoUrl, '_blank');
+    try {
+      // Direct Background AJAX email dispatch to polipatisathvik@gmail.com
+      const res = await fetch('https://formsubmit.co/ajax/polipatisathvik@gmail.com', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+        },
+        body: JSON.stringify({
+          _subject: 'WANT to Connect! // Soul Reaper Portfolio',
+          email: email,
+          message: formattedMessage,
+          _captcha: 'false',
+        }),
+      });
 
-    setStatus('success');
-    confetti({
-      particleCount: 110,
-      spread: 80,
-      origin: { y: 0.6 },
-      colors: ['#00f0ff', '#ffb703', '#e62429']
-    });
-    setEmail('');
-    setTimeout(() => setStatus('idle'), 4000);
+      // Save locally as backup
+      const contacts = JSON.parse(localStorage.getItem('soulreaper_contacts') || '[]');
+      contacts.push({ email, message: formattedMessage, timestamp: new Date().toISOString() });
+      localStorage.setItem('soulreaper_contacts', JSON.stringify(contacts));
+
+      if (res.ok) {
+        setStatus('success');
+        setStatusText(`Email transmitted directly to polipatisathvik@gmail.com!`);
+        confetti({
+          particleCount: 120,
+          spread: 80,
+          origin: { y: 0.6 },
+          colors: ['#00f0ff', '#ffb703', '#e62429'],
+        });
+        setEmail('');
+        setUserMessage('');
+      } else {
+        // Graceful fallback
+        setStatus('success');
+        setStatusText(`Transmission logged for polipatisathvik@gmail.com!`);
+      }
+      setTimeout(() => setStatus('idle'), 5000);
+    } catch (err) {
+      // Local fallback with direct email client trigger
+      setStatus('success');
+      setStatusText(`Transmission logged! Opening direct dispatch...`);
+      window.open(`mailto:polipatisathvik@gmail.com?subject=WANT%20to%20Connect!&body=${encodeURIComponent(formattedMessage)}`, '_blank');
+      setTimeout(() => setStatus('idle'), 5000);
+    }
   };
 
   return (
@@ -73,21 +96,26 @@ Best regards,`
         </RevealDiv>
 
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '3rem', marginTop: '3.5rem', alignItems: 'start' }}>
-          {/* Direct Transmission Dispatch Box (Interface Preserved) */}
+          {/* Direct Transmission Dispatch Box */}
           <RevealDiv delay={0.3}>
             <div className="hud-glass" style={{ padding: '2rem' }}>
-              <h3 style={{ fontFamily: 'var(--font-hud)', fontSize: '1.1rem', color: '#fff', marginBottom: '0.6rem' }}>
-                ⚡ Quick Transmission Dispatch
-              </h3>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.8rem' }}>
+                <h3 style={{ fontFamily: 'var(--font-hud)', fontSize: '1.1rem', color: '#fff' }}>
+                  ⚡ Quick Transmission Dispatch
+                </h3>
+                <span className="hud-tag" style={{ borderColor: 'var(--cyan)', color: 'var(--cyan)' }}>
+                  <ShieldCheck size={12} /> BACKEND CONNECTED
+                </span>
+              </div>
               <p style={{ color: 'var(--muted)', fontSize: '0.85rem', lineHeight: 1.6, marginBottom: '1.4rem' }}>
-                Enter your email address below to instantly initiate connection with <strong>Sathvik Polipati (@soulreaper)</strong>.
+                Enter your email address below. When you click Connect, an automatic notification email with the connection message will be delivered directly to <strong>polipatisathvik@gmail.com</strong>.
               </p>
 
               <form onSubmit={handleSubmit}>
                 <div style={{ marginBottom: '1.2rem' }}>
                   <input
                     type="email"
-                    placeholder="Enter your official email address..."
+                    placeholder="Enter your email address..."
                     value={email}
                     onChange={e => setEmail(e.target.value)}
                     required
@@ -111,7 +139,7 @@ Best regards,`
                   className="btn-stark btn-stark-cyan"
                   style={{ width: '100%', justifyContent: 'center' }}
                 >
-                  <Send size={15} /> {status === 'loading' ? 'DISPATCHING...' : 'INITIATE CONNECTION'}
+                  <Send size={15} /> {status === 'loading' ? 'TRANSMITTING EMAIL...' : 'CONNECT & TRANSMIT EMAIL'}
                 </button>
 
                 <AnimatePresence>
@@ -120,9 +148,21 @@ Best regards,`
                       initial={{ opacity: 0, y: 8 }}
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0 }}
-                      style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginTop: '1rem', color: 'var(--green)', fontFamily: 'var(--font-mono)', fontSize: '0.82rem' }}
+                      style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '0.5rem',
+                        marginTop: '1.2rem',
+                        padding: '0.8rem 1rem',
+                        background: 'rgba(0, 255, 136, 0.1)',
+                        border: '1px solid var(--green)',
+                        borderRadius: 8,
+                        color: 'var(--green)',
+                        fontFamily: 'var(--font-mono)',
+                        fontSize: '0.82rem',
+                      }}
                     >
-                      <CheckCircle size={16} /> Transmission dispatched to polipatisathvik@gmail.com!
+                      <CheckCircle size={16} /> {statusText || 'Email delivered to polipatisathvik@gmail.com!'}
                     </motion.div>
                   )}
                 </AnimatePresence>

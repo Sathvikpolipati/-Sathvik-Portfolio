@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { ExternalLink, GitBranch, X, Play, Eye, Activity, CheckCircle2, Globe } from 'lucide-react';
+import { ExternalLink, GitBranch, X, Play, Eye, Activity, CheckCircle2, Globe, Sparkles } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { RevealDiv } from '../components/RevealDiv';
 
@@ -8,7 +8,7 @@ const PROJECTS = [
     id: 'cc-prediction',
     title: 'Credit Card Approval Prediction System',
     desc: 'Machine Learning classification pipeline engineered using logistic regression and decision tree classifiers to predict credit card application approvals with feature importance analysis and ROC-AUC evaluation.',
-    tags: ['Python', 'Scikit-Learn', 'Pandas', 'Classification', 'ML', 'Live Vercel'],
+    tags: ['Python', 'Scikit-Learn', 'Pandas', 'Classification', 'ML', 'Live Preview'],
     img: 'https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=800&auto=format&fit=crop&q=85',
     gh: 'https://github.com/Sathvikpolipati/SathvikPolipati-Portfolio',
     live: 'https://sathvik-portfolio-gamma.vercel.app',
@@ -107,7 +107,7 @@ function LiveSimulator({ project }) {
         </div>
         <div style={{ display: 'flex', gap: '0.5rem' }}>
           <span className="hud-tag" style={{ borderColor: 'var(--green)', color: 'var(--green)' }}>
-            ⚡ LIVE IN-PORTFOLIO PREVIEW
+            ⚡ IN-PORTFOLIO LIVE SIMULATION
           </span>
         </div>
       </div>
@@ -117,10 +117,10 @@ function LiveSimulator({ project }) {
         <div>
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.8rem' }}>
             <span style={{ fontFamily: 'var(--font-hud)', fontSize: '0.85rem', color: 'var(--cyan)' }}>
-              ⚡ LIVE ML CLASSIFICATION MODEL
+              ⚡ LIVE ML CLASSIFICATION ENGINE
             </span>
             <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.72rem', color: 'var(--gold)' }}>
-              Model: Random Forest / Logistic Reg
+              Algorithm: Random Forest Classifier
             </span>
           </div>
 
@@ -166,7 +166,7 @@ function LiveSimulator({ project }) {
           }}>
             <div style={{ fontFamily: 'var(--font-hud)', fontSize: '1.05rem', color: isApproved ? 'var(--green)' : 'var(--crimson)', fontWeight: 700 }}>
               {isApproved
-                ? `✅ PREDICTION: APPLICATION APPROVED (${Math.min(99, Math.round(calculatedApproval))}% Confidence)`
+                ? `✅ PREDICTION: APPLICATION APPROVED (${Math.min(99, Math.round(calculatedApproval))}% Confidence Score)`
                 : `❌ PREDICTION: APPLICATION REJECTED (${Math.min(99, Math.round(100 - calculatedApproval))}% Risk Index)`}
             </div>
           </div>
@@ -203,7 +203,7 @@ function LiveSimulator({ project }) {
           <Activity size={32} color="var(--cyan)" style={{ margin: '0 auto 0.6rem' }} />
           <div style={{ fontFamily: 'var(--font-hud)', fontSize: '0.9rem', color: '#fff' }}>GITHUB LIVE TELEMETRY ACTIVE</div>
           <p style={{ fontSize: '0.8rem', color: 'var(--muted)', marginTop: '0.3rem' }}>
-            Live code and simulation verified. Click below to launch the project.
+            Live code and repository telemetry ready. Click below to inspect the whole project on GitHub.
           </p>
         </div>
       )}
@@ -221,7 +221,7 @@ export function Projects() {
         <RevealDiv delay={0.1}><h2 className="sec-hud-title">Featured Projects</h2></RevealDiv>
         <RevealDiv delay={0.2}>
           <p className="sec-hud-desc">
-            Explore cyber defense tools, machine learning pipelines, and full-stack software. Click <strong>Live Review</strong> to interact directly on this page.
+            Explore cyber defense tools, machine learning pipelines, and full-stack software. Click <strong>Live Review</strong> to interact with the project directly in this portfolio.
           </p>
         </RevealDiv>
 
@@ -235,7 +235,7 @@ export function Projects() {
                 transition={{ duration: 0.3 }}
                 style={{ overflow: 'hidden', display: 'flex', flexDirection: 'column', height: '100%' }}
               >
-                {/* ── Clear, High-Res Project Cover Image (No dark overlay!) ── */}
+                {/* ── Clear, High-Res Project Cover Image ── */}
                 <div
                   onClick={() => setModal(p)}
                   style={{
@@ -306,7 +306,7 @@ export function Projects() {
                       onClick={() => setModal(p)}
                       style={{ background: 'none', border: 'none', color: 'var(--cyan)', fontFamily: 'var(--font-mono)', fontSize: '0.75rem', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.3rem' }}
                     >
-                      <Eye size={14} /> Review Here
+                      <Eye size={14} /> Preview Here
                     </button>
                     <a
                       href={p.gh}
@@ -314,7 +314,7 @@ export function Projects() {
                       rel="noopener"
                       style={{ color: 'var(--muted)', textDecoration: 'none', fontFamily: 'var(--font-mono)', fontSize: '0.75rem', display: 'flex', alignItems: 'center', gap: '0.3rem' }}
                     >
-                      <GitBranch size={14} /> GitHub
+                      <GitBranch size={14} /> View on GitHub
                     </a>
                   </div>
                 </div>
@@ -324,7 +324,7 @@ export function Projects() {
         </div>
       </div>
 
-      {/* ── Live Interactive Preview Modal ── */}
+      {/* ── Live In-Portfolio Review & GitHub Project Launcher Modal ── */}
       <AnimatePresence>
         {modal && (
           <motion.div
@@ -349,7 +349,7 @@ export function Projects() {
               exit={{ scale: 0.95, opacity: 0 }}
               className="hud-glass"
               style={{
-                maxWidth: 740,
+                maxWidth: 750,
                 width: '100%',
                 maxHeight: '90vh',
                 overflowY: 'auto',
@@ -390,23 +390,23 @@ export function Projects() {
               {/* In-Place Live Simulator */}
               <LiveSimulator project={modal} />
 
-              {/* Bottom Buttons with Live Vercel link */}
+              {/* Bottom Project Buttons */}
               <div style={{ display: 'flex', gap: '1rem', marginTop: '1.6rem', flexWrap: 'wrap' }}>
-                <a
-                  href={modal.live}
-                  target="_blank"
-                  rel="noopener"
-                  className="btn-stark btn-stark-cyan"
-                >
-                  <Globe size={16} /> Launch Live Vercel App
-                </a>
                 <a
                   href={modal.gh}
                   target="_blank"
                   rel="noopener"
+                  className="btn-stark btn-stark-cyan"
+                >
+                  <ExternalLink size={16} /> View Whole Live Project on GitHub
+                </a>
+                <a
+                  href={modal.live}
+                  target="_blank"
+                  rel="noopener"
                   className="btn-stark btn-stark-ghost"
                 >
-                  <GitBranch size={16} /> GitHub Repository
+                  <Globe size={16} /> Launch Live Vercel Deployment
                 </a>
               </div>
             </motion.div>
