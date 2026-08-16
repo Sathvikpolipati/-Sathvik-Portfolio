@@ -1,3 +1,4 @@
+import profilePic from '../assets/profile.jpg';
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Shield, Terminal, Download, ExternalLink } from 'lucide-react';
@@ -101,7 +102,7 @@ export function Hero({ onResumeClick }) {
           animation: 'arc-pulse 3s ease-in-out infinite',
         }}>
           <img
-            src="/profile.jpg"
+            src={profilePic}
             alt="Sathvik Polipati (Soul Reaper)"
             style={{
               width: '100%',
